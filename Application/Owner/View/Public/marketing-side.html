@@ -1,0 +1,23 @@
+<ul class="ula">
+    <li><a href="{:U('Index/bwlmain')}" target="main">备忘录</a>
+    </li>
+    <li class="bg">
+        <a href="{:U('Index/index')}" target="main">系统通知</a>
+        <span class="badge">{$Think.session.rids}</span>
+    </li>
+</ul>
+<div class="ulb">
+    <ul class="listUl">    
+        <li>
+            <h3>市场管理</h3>
+            <ul>
+                <li> 
+                    <a href="{:U('/marketing/view', array('table'=>'event', 'bid'=>I('bid')))}">市场活动</a>
+                </li>
+                <li> 
+                    <a href="{:U('/marketing/view', array('table'=>'collect', 'bid'=>I('bid')))}">采单表</a> 
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

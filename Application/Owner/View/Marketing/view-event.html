@@ -1,0 +1,45 @@
+<table class="table table-bordered center-block" style="width:97.5%; margin-bottom:0px;">
+    <h2 class="lmbt">市场活动信息</h2>
+    <tr>
+        <td>        </td>
+        <td width="110">
+            <a href="{:U('/marketing/create', array('table'=>'event', 'bid'=>I('get.bid')))}" class="btn btn-success" data-toggle="modal">新增活动</a>
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
+    <thead>
+        <tr>
+            <th>活动名称</th>
+            <th>实际采单量</th>
+            <th>计划开始时间</th>
+            <th>计划结束时间</th>
+            <th>活动负责人</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <if condition="$results">
+        <foreach name="results" item="val">
+            <tr>
+                <td>{$val.title}</td>
+                <td></td>
+                <td>{$val.time_begin}</td>
+                <td>{$val.time_end}</td>
+                <td>{$val.user|findMember=###, 'name'}</td>
+                <td>{$val.status_text}</td>
+                <td width="260" class="text-center">
+                    <a href="#" class="btn btn-sm btn-success" >导入客户</a>
+                    <a href="{:U('/marketing/update', array('table'=>'event', 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-sm btn-warning" >更新</a>
+                    <a href="{:U('/marketing/eventDel', array('table'=>'event', 'bid'=>I('get.bid') ,'id'=>$val['id']))}" class="btn btn-sm btn-danger" onclick="if(confirm('确定要删除这次活动吗？')==false)return false;" >删除</a>
+                </td>
+            </tr>
+        </foreach>
+    <else />
+        <tr>
+            <td class="text-center" colspan="99">
+                暂无任何数据
+            </td>
+        </tr>
+    </if>
+</table>

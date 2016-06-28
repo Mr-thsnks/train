@@ -1,0 +1,35 @@
+<table class="table center-block" style="width:97.5%; margin-bottom:0px;">
+    <tr style="background-color:#e8e8e8;">
+        <td colspan="2" align="center">角色认证</td>
+    </tr>
+    <tr>
+        <td align="center"></td>
+        <td align="right">
+            <a href="{:U('/Setting/create', array('table'=>I('get.table'), 'bid'=>I('get.bid')))}" class="btn btn-sm btn-success">新增</a>
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
+    <thead>
+        <tr>
+            <th>角色名称</th>
+            <th>角色状态</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <if condition="$results">
+        <foreach name="results" item="val">
+            <tr align="center">
+                <td>{$val.title}</td>
+                <td>{$val.status_text}</td>
+                <td width="75px">
+                    <a href="{:U('/setting/update', array('table'=>I('get.table'), 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-sm btn-warning" >编辑</a>
+                </td>
+            </tr>
+        </foreach>
+    <else />
+        <tr align="center">
+            <td class="text-center" colspan="99">暂无任何角色</td>
+        </tr>
+    </if>
+</table>

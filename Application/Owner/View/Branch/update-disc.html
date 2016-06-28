@@ -1,0 +1,60 @@
+<form action="{:U('__SELFURL__')}" method="post" class="validatable">
+    <table class="table table-bordered center-block" style="width:97.5%; margin-bottom:0px;">
+
+        <tr>
+            <td width="140" class="text-right">优惠名称 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="title" class="form-control" value="{$result.title}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">优惠描述 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="desc" class="form-control"  value="{$result.desc}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">优惠类型 ：</td>
+            <td>
+                <div class="col-md-2">
+                    <select name="" class="form-control">
+                        <eq name="result.type" value="1">
+                            <option value="1" selected>折扣</option>
+                            <option value="2">减价</option>
+                        <else />
+                            <option value="1">折扣</option>
+                            <option value="2" selected>减价</option>
+                        </eq>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">折扣/金额 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="amount" class="form-control" value="{$result.amount}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">相关活动 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="event" class="form-control" value="{$result.event}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">优惠原因 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="explain" class="form-control" value="{$result.explain}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">&nbsp;</td>
+            <td>
+                <div class="col-md-10">
+                    <button type="submit" class="btn btn-sm btn-success">保存</button>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:history.back(-1);">取消</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

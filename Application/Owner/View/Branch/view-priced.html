@@ -1,0 +1,49 @@
+<table class="table center-block" style="width:97.5%; margin-bottom:10px;">
+    <tr style="background-color:#e8e8e8;">
+        <td colspan="2" align="center">定价管理</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td width="80">
+            <a href="{:U('/setting/create', array('table'=>I('get.table'), 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-success">新增</a> 
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
+    <thead>
+        <tr>
+            <th class="text-center">科目</th>
+            <th class="text-center">课程编号</th>
+            <th class="text-center">课程描述</th>
+            <th class="text-center">单价</th>
+            <th class="text-center">折扣价</th>
+            <th class="text-center">课时数</th>
+            <th class="text-center">总课次数</th>
+            <th class="text-center">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <if condition="$results">
+            <foreach name="results" item="val">
+                <tr>
+                    <td class="text-center">{$val.subject_id|findSubject}</td>
+                    <td class="text-center">{$val.title}</td>
+                    <td class="text-center">{$val.desc}</td>
+                    <td class="text-right">{$val.price}</td>
+                    <td class="text-right">{$val.price_disc}</td>
+                    <td class="text-center">{$val.total_hours}</td>
+                    <td class="text-center">{$val.total_nums}</td>
+                    <td class="text-center" width="160px">
+                        <a href="{:U('/setting/update', array('table'=>I('table'), 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-sm btn-warning" >编辑</a>
+                        <a href="{:U('/setting/del', array('table'=>I('table'), 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-sm btn-danger" >删除</a>
+                    </td>
+                </tr>
+            </foreach>
+        <else />
+            <tr>
+                <!-- <td>课程编号</td> -->
+                <td>暂无任何数据</td>
+            </tr>
+        </if>
+    </tbody>
+</table>

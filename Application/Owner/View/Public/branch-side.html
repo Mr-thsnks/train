@@ -1,0 +1,53 @@
+<ul class="ula">
+    <li><a href="{:U('Index/bwlmain')}" target="main">备忘录</a>
+    </li>
+    <li class="bg">
+        <a href="{:U('Index/index')}" target="main">系统通知</a>
+        <span class="badge">{$Think.session.rids}</span>
+    </li>
+</ul>
+<div class="ulb">
+    <ul class="listUl">    
+        <li>
+            <h3>基础设置</h3>
+            <ul>
+                <li> 
+                    <a href="{:U('/Setting/view', array('table'=>'dict', 'bid'=>I('bid')))}">字典设置</a>
+                </li>
+                <li> 
+                    <a href="{:U('/Setting/view', array('table'=>'disc', 'bid'=>I('bid')))}">优惠管理</a> 
+                </li>
+                <li> 
+                    <a href="{:U('/Setting/view', array('table'=>'subject', 'bid'=>I('bid')))}">科目管理</a> 
+                </li>
+                <li> 
+                    <a href="{:U('/Setting/view', array('table'=>'priced', 'bid'=>I('bid')))}">定价管理</a> 
+                </li>
+                <li> 
+                    <a href="{:U('/Setting/view', array('table'=>'expire', 'bid'=>I('bid')))}">到期设置</a> 
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h3>系统管理</h3>
+            <ul>
+                <li>
+                    <a href="{:U('/Setting/auth', array('table'=>'auth', 'bid'=>I('bid')))}">角色认证</a>
+                </li>
+                <li>
+                    <a href="{:U('/Setting/user', I('get.'))}">帐号</a>
+                </li>
+            </ul>
+        </li>
+        <!-- <li>
+            <h3>数据配分</h3>
+            <ul>
+                <foreach name='leftBranch' item='val'>
+                    <li>
+                        <a href="{:U('/branch/view', array('bid'=>$val['id']))}">{$val.organizat}</a>
+                    </li>
+                </foreach>
+            </ul>
+        </li> -->
+    </ul>
+</div>

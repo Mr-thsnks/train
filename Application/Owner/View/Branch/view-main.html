@@ -1,0 +1,46 @@
+<link href='__PUBLIC__/css/fullcalendar.css' rel='stylesheet' />
+<link href='__PUBLIC__/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='__PUBLIC__/js/moment.min.js'></script>
+<script src="__PUBLIC__/js/fullcalendar.min.js"></script>
+<script>
+    $(function() {
+        $('#course-calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            events: '/branch/fullcalendar.html',
+            dayClick: function(date, allDay, jsEvent, view) {
+                var selDate =$.fullCalendar.formatDate(date,'yyyy-MM-dd');
+                $.fancybox({
+                    'type':'ajax',
+                    'href':'event.php?action=add&date='+selDate
+                });
+            },
+            eventClick: function(calEvent, jsEvent, view) {
+                $.fancybox({
+                    'type':'ajax',
+                    'href':'event.php?action=edit&id='+calEvent.id
+                });
+            }
+        });
+    });
+</script>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#course" aria-controls="course" role="tab" data-toggle="tab">课程</a></li>
+    <li role="presentation"><a href="#try-class" aria-controls="try-class" role="tab" data-toggle="tab">试课</a></li>
+    <li role="presentation"><a href="#leave" aria-controls="leave" role="tab" data-toggle="tab">请假</a></li>
+    <li role="presentation"><a href="#suspend" aria-controls="suspend" role="tab" data-toggle="tab">休学</a></li>
+    <li role="presentation"><a href="#truancy" aria-controls="truancy" role="tab" data-toggle="tab">旷课</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content" style="padding-top: 20px;">
+    <div role="tabpanel" class="tab-pane active" id="course"><div id="course-calendar" style=""></div></div>
+    <div role="tabpanel" class="tab-pane" id="try-class"><div id="try-class-calendar" style=""></div></div>
+    <div role="tabpanel" class="tab-pane" id="leave"><div id="leave-calendar" style=""></div></div>
+    <div role="tabpanel" class="tab-pane" id="suspend"><div id="suspend-calendar" style=""></div></div>
+    <div role="tabpanel" class="tab-pane" id="truancy"><div id="truancy-calendar" style=""></div></div>
+</div>

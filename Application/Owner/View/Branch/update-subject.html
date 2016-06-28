@@ -1,0 +1,70 @@
+<div>
+    <form action="{:U('__SELFURL__')}" method="post" class="validatable">
+        <table class="table table-bordered center-block" style="width:97.5%; margin-bottom:0px;">
+            <tr>
+                <td width="140" class="text-right">科目名称 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="title" class="form-control" value="{$result.title}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">科目描述 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="desc" class="form-control"  value="{$result.desc}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">总学时数 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="total_hours" class="form-control" value="{$result.total_hours}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">总课次数 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="total_nums" class="form-control" value="{$result.total_nums}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">每周上课次数 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="weekly_nums" class="form-control" value="{$result.weekly_nums}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">单次学时 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="single_time" class="form-control" value="{$result.single_time}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">考勤制度 ：</td>
+                <td>
+                    <div class="col-md-2">
+                        <select name="attn_system" class="form-control">
+                            <option value="考勤制度1">考勤制度1</option>
+                            <option value="考勤制度2">考勤制度2</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">&nbsp;</td>
+                <td>
+                    <div class="col-md-10">
+                        <input type="hidden" name="table" value="{:I('get.table')}">
+                        <button type="submit" class="btn btn-sm btn-success">保存</button>
+                        <button type="button" class="btn btn-sm btn-warning" onclick="javascript:history.back(-1);">取消</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+ 
+ 
+ 
+ 
+ 
+ 

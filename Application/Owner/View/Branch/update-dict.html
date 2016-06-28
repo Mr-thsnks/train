@@ -1,0 +1,68 @@
+<form action="{:U('__SELFURL__')}" method="post" class="validatable">
+    <table class="table table-bordered center-block" style="width:97.5%; margin-bottom:0px;">
+        <tr>
+            <td width="140" class="text-right">分类 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="cate" class="form-control" value="{$result.class}" disabled></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">名字一 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="name1" class="form-control"  value="{$result.name1}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">名字二 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="name2" class="form-control" value="{$result.name2}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">名字三 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="name3" class="form-control" value="{$result.name3}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">名字四 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="name4" class="form-control" value="{$result.name4}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">状态 ：</td>
+            <td>
+                <div class="col-md-2">
+                    <select name="status" class="form-control">
+                        <eq name="result.status" value="0">
+                            <option value="0" selected="selected">停用</option>
+                        <else />
+                            <option value="0">停用</option>
+                        </eq>
+                        <eq name="result.status" value="1">
+                            <option value="1" selected="selected">使用</option>
+                        <else />
+                            <option value="1">使用</option>
+                        </eq>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">操作人 ：</td>
+            <td>
+                <div class="col-md-2"><input type="text" name="operator" class="form-control" value="{$result.operator|findAuth}" disabled></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">&nbsp;</td>
+            <td>
+                <div class="col-md-10">
+                    <button type="submit" class="btn btn-sm btn-success">保存</button>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:history.back(-1);">取消</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

@@ -1,0 +1,45 @@
+<table class="table center-block" style="width:97.5%; margin-bottom:0px;">
+    <tr style="background-color:#e8e8e8;">
+        <td colspan="2" align="center">字典设置</td>
+    </tr>
+    <tr>
+        <td align="center"></td>
+        <td align="right">
+            <a href="{:U('/Setting/create', array('table'=>I('get.table'), 'bid'=>I('get.bid')))}" class="btn btn-sm btn-success">新增</a>
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
+    <thead>
+        <tr>
+            <th>分类</th>
+            <th>名字一</th>
+            <th>名字二</th>
+            <th>名字三</th>
+            <th>名字四</th>
+            <th>状态</th>
+            <th>操作人</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <if condition="$results">
+        <foreach name="results" item="val">
+            <tr align="center">
+                <td>{$val.class}</td>
+                <td>{$val.name1}</td>
+                <td>{$val.name2}</td>
+                <td>{$val.name3}</td>
+                <td>{$val.name4}</td>
+                <td>{$val.status_text}</td>
+                <td>{$val.operator|findAuth=###}</td>
+                <td width="75px">
+                    <a href="{:U('/setting/update', array('table'=>'dict', 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-sm btn-warning" >编辑</a>
+                </td>
+            </tr>
+        </foreach>
+    <else />
+        <tr align="center">
+            <td class="text-center" colspan="99">暂无字典设置</td>
+        </tr>
+    </if>
+</table>

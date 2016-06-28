@@ -1,0 +1,51 @@
+<div>
+    <form action="{:U('__SELFURL__')}" method="post" class="validatable">
+        <table class="table table-bordered center-block" style="width:97.5%; margin-bottom:0px;">
+            <tr>
+                <td width="140" class="text-right">组织机构 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="organizat" class="form-control" value="{$result.organizat}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">主负责人 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="principal" class="form-control"  value="{$result.principal}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">负责人电话 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="phone" class="form-control" value="{$result.phone}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">内线电话 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="inside_call" class="form-control" value="{$result.inside_call}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">地址 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="addr" class="form-control" value="{$result.addr}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">显示顺序 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="sort" class="form-control" value="{$result.sort}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">&nbsp;</td>
+                <td>
+                    <div class="col-md-10">
+                        <button type="submit" class="btn btn-sm btn-success">保存</button>
+                        <button type="button" class="btn btn-sm btn-warning" onclick="javascript:history.back(-1);">取消</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

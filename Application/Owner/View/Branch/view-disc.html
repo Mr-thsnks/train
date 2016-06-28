@@ -1,0 +1,65 @@
+<table class="table center-block" style="width:97.5%; margin-bottom:0px;">
+    <tr style="background-color:#e8e8e8;">
+        <td colspan="2" align="center">优惠信息</td>
+    </tr>
+    <tr>
+        <td>
+            <!-- <form class="form-inline">
+                <label for="name">类型：</label>
+                <select class="form-control" onChange="fun(this)">
+                    <empty name="id">
+                        <option >- 请选择 -</option>
+                    </empty>
+
+                    <notempty name="id">
+                        <option value="{$id}">{$id}</option>
+                    </notempty>
+
+                    <volist name="que" id="vo">
+                        <option value="{$vo.yh_leix}">{$vo.yh_leix}</option>
+                    </volist>
+                </select>
+                <a href="?m=Admin&c=Xiaoshou&a=yhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" class="btn btn-danger">还原</a>
+            </form> -->
+        </td>
+        <td width="80" class="text-center">
+            <a href="{:U('/Setting/create', array('table'=>I('get.table'), 'bid'=>I('get.bid')))}" class="btn btn-sm btn-success">新增</a>
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
+    <thead>
+        <tr>
+            <th class="text-center">优惠名称</th>
+            <th class="text-center">优惠描述</th>
+            <th class="text-center">优惠类型</th>
+            <th class="text-center">折扣/金额</th>
+            <th class="text-center">相关活动</th>
+            <th class="text-center">优惠原因</th>
+            <th class="text-center">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <if condition="$results">
+            <foreach name="results" item="val">
+                <tr>
+                    <td class="text-center">{$val.title}</td>
+                    <td class="text-center">{$val.desc}</td>
+                    <td class="text-center">{$val.type_text}</td>
+                    <td class="text-right">{$val.amount}</td>
+                    <td class="text-center">{$val.event}</td>
+                    <td class="text-center">{$val.explain}</td>
+                    <td class="text-center" width="140px">
+                        <a href="{:U('/setting/update', array('table'=>I('table'), 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-sm btn-warning" >编辑</a>
+                        <a href="{:U('/setting/del', array('table'=>I('table'), 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-sm btn-danger" >删除</a>
+                    </td>
+                </tr>
+            </foreach>
+        <else />
+            <tr>
+                <td class="text-center">暂无优惠信息</td>
+            </tr>
+        </if>
+    </tbody>
+</table>
+        

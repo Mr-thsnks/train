@@ -1,0 +1,29 @@
+<table class="table center-block" style="width:97.5%; margin-bottom:0px;">
+    <tr style="background-color:#e8e8e8;">
+        <php>
+            $authGroup = M('auth_group');
+            $authMap['id'] = I('get.id');
+            $authTitle = $authGroup->where($authMap)->field('title')->find();
+        </php>
+        <td colspan="2" align="center">当前角色 : {$authTitle.title}</td>
+    </tr>
+</table>
+<form action="#" method="post" class="validatable"><!-- {:U('__SELFURL__')} -->
+    <table class="table table-bordered center-block" style="width:97.5%; margin-bottom:0px;">
+        <tr>
+            <td width="140" class="text-right">真是姓名 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="name" class="form-control" value="{$result.name}"  data-validation-engine="validate[required]"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">&nbsp;</td>
+            <td>
+                <div class="col-md-10">
+                    <button type="submit" class="btn btn-sm btn-success">保存</button>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:history.back(-1);">取消</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

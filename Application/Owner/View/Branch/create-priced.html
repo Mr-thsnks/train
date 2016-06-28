@@ -1,0 +1,83 @@
+<div>
+    <form action="{:U('__SELFURL__')}" method="post" class="validatable">
+        <table class="table table-bordered" style="width:97.5%; margin-bottom:0px;">
+            <tr>
+                <td width="140" class="text-right">科目选择 ：</td>
+                <td>
+                    <div class="col-md-2">
+                        <php>
+                            $branchSubject = M('Branch_subject');
+                            $subject = $branchSubject->field('id, title')->select();
+                        </php>
+                        <select name="subject_id" class="form-control">
+                            <if condition="$subject">
+                                <foreach name="subject" item="val">
+                                    <option value="{$val.id}">{$val.title}</option>
+                                </foreach>
+                            <else />
+                                <option value="">暂无科目信息</option>
+                            </if>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">课程编号 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="title" class="form-control" value=""></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">课程描述 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="desc" class="form-control"  value=""></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">单价 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="price" class="form-control" value=""></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">折扣价 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="price_disc" class="form-control" value=""></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">课时数 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="total_hours" class="form-control" value=""></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">总课次数 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="total_nums" class="form-control" value=""></div>
+                </td>
+            </tr>
+            <!-- <tr>
+                <td width="140" class="text-right">状态 ：</td>
+                <td>
+                    <div class="col-md-2">
+                        <select name="status" class="form-control">
+                            <option value="0">停用</option>
+                            <option value="1" selected>使用</option>
+                        </select>
+                    </div>
+                </td>
+            </tr> -->
+            <tr>
+                <td width="140" class="text-right">&nbsp;</td>
+                <td>
+                    <div class="col-md-10">
+                        <input type="hidden" name="table" value="{:I('get.table')}">
+                        <button type="submit" class="btn btn-sm btn-success">保存</button>
+                        <button type="button" class="btn btn-sm btn-warning" onclick="javascript:history.back(-1);">取消</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

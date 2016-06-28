@@ -1,0 +1,28 @@
+<div>
+    <form action="{:U('__SELFURL__')}" method="post" class="validatable">
+        <table class="table table-bordered" style="width:97.5%; margin-bottom:0px;">
+            <tr>
+                <td width="140" class="text-right">设置天数 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="days" class="form-control" value=""></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">设置次数 ：</td>
+                <td>
+                    <div class="col-md-10"><input type="text" name="nums" class="form-control"  value=""></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="140" class="text-right">&nbsp;</td>
+                <td>
+                    <div class="col-md-10">
+                        <input type="hidden" name="table" value="{:I('get.table')}">
+                        <button type="submit" class="btn btn-sm btn-success">保存</button>
+                        <button type="button" class="btn btn-sm btn-warning" onclick="javascript:history.back(-1);">取消</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

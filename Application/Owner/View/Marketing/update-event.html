@@ -1,0 +1,152 @@
+<script language="javascript" type="text/javascript" src="__PUBLIC__/time/WdatePicker.js"></script> 
+<form action="{:U('__SELFURL__', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'id'=>I('get.id')])}" method="post" class="validatable">
+    <table class="table table-bordered center-block">
+        <tr style="background-color: #E6E6E6;">
+            <td colspan="2"><strong>基本信息</strong></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="name">活动名称:</label>
+                <input type="text" class="form-control" id="exampleInputName2" name="title" value="{$event.title}" data-validation-engine="validate[required]">
+            </td>
+            <td>
+                <label for="name">当前状态:</label data-validation-engine="validate[required]">
+                <select class="form-control" name="status">
+                    <option value="">请选择状态</option>
+                    <option value="0">取消</option>
+                    <option value="1" selected>进行中</option>
+                    <option value="2">已结束</option>
+                </select>
+            </td>
+        </tr>
+        <tr style="background-color: #E6E6E6;">
+            <td colspan="2"><strong>计划信息</strong></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="name">活动地点:</label>
+                <input type="text" class="form-control" id="exampleInputName2" name="location" value="{$event.location}" data-validation-engine="validate[required]">
+            </td>
+            <td>
+                <label for="name">活动类型:</label>
+                <select class="form-control" name="type" data-validation-engine="validate[required]">
+                    <option style="color:blue;">{$event.type}</option>
+                    <volist name="eventType" id="so">
+                        <option value="{$so.name1}">{$so.name1}</option>
+                        <option value="{$so.name2}">{$so.name2}</option>
+                        <option value="{$so.name3}">{$so.name3}</option>
+                        <option value="{$so.name4}">{$so.name4}</option>
+                    </volist>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="name">计划开始时间:</label>
+                <input class=" form-control Wdate" type="text" name="time_begin" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="{$event.time_begin}" data-validation-engine="validate[required]"  readonly>
+            </td>
+            <td>
+                <label for="name">计划结束时间:</label>
+                <input class=" form-control Wdate" type="text" name="time_end" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="{$event.time_end}"  data-validation-engine="validate[required]" readonly>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="name">预计成本:</label>
+                <input type="text" class="form-control" id="exampleInputName2" name="projected_costs" value="{$event.projected_costs}" data-validation-engine="validate[required, custom[number]]">
+            </td>
+            <td>
+                <label for="name">预计采单量:</label>
+                <input type="text" class="form-control" id="exampleInputName2" name="quantity" value="{$event.quantity}" data-validation-engine="validate[required, custom[number]]">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="name">活动负责人:</label>
+                <select class="form-control" name="user" data-validation-engine="validate[required]">
+                    <option value="">请下拉选择</option>
+                    <foreach name="memList" item="val">
+                        <if condition="$val['id'] EQ $event['user']">
+                            <option value="{$val.id}" selected>{$val.name}</option>
+                        <else />
+                            <option value="{$val.id}">{$val.name}</option>
+                        </if>
+                    </foreach>
+                </select>
+            </td>
+            <td>
+                <label for="name">执行周期（天）:</label>
+                <input type="text" class="form-control" id="exampleInputName2" name="execute_days" value="{$event.execute_days}" data-validation-engine="validate[required]">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label for="name">执行次数:</label>
+                <input type="text" class="form-control" id="exampleInputName2" name="execute_nums" value="{$event.execute_nums}" data-validation-engine="validate[required]">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label for="name">活动时间表:</label>
+                <textarea class="form-control" rows="3" name="timetable">{$event.timetable}</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label for="name">活动描述:</label>
+                <textarea class="form-control" rows="3" name="desc">{$event.desc}</textarea>
+            </td>
+        </tr>
+        <tr style="background-color: #E6E6E6;">
+            <td colspan="2"><strong>实际执行信息</strong></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="name">实际开始时间:</label>
+                <input class=" form-control " type="text" name="time_begin_actual" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="{$eventActual.time_begin_actual}" data-validation-engine="validate[required]"  readonly>
+            </td>
+            <td>
+                <label for="name">实际结束时间:</label>
+                <input class=" form-control " type="text" name="time_end_actual" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="{$eventActual.time_end_actual}"  data-validation-engine="validate[required]"  readonly>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="name">实际投入:</label>
+                <input type="text" class="form-control" id="exampleInputName2" name="amount_actual" value="{$eventActual.amount_actual}" data-validation-engine="validate[required, custom[number]]">
+            </td>
+            <td>
+                <label for="name">实际采单量:</label>
+                <input type="text" class="form-control" id="exampleInputName2" name="quantity_actual" value="{$eventActual.quantity_actual}" data-validation-engine="validate[required, custom[number]]">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label for="name">活动总结:</label>
+                <textarea class="form-control" rows="3" name="summary_actual"  value="">{$eventActual.summary_actual}</textarea>
+            </td>
+        </tr>                
+        <tr style="background-color: #E6E6E6;">
+            <td colspan="2"><strong>操作记录</strong></td>
+        </tr>
+        <tr>
+            <td>创建人 : {$eventOperation.create_user|findMember=###, 'name'}</td>
+            <td>创建时间 : {$eventOperation.create_time}</td>
+        </tr>
+        <tr>
+            <td>
+                更新人 : <neq name="eventOperation.update_user" value="0">{$eventOperation.update_user|findMember=###, 'name'}<else />暂无</neq>
+            </td>
+            <td>
+                更新时间 : <neq name="eventOperation.update_time" value="0000-00-00 00:00:00">{$eventOperation.update_time}<else />暂无</neq>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input name="" class="btn btn-danger" style="float:right;margin-right:20px;" type="submit" value="提交" />
+                <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);" style="float:right; margin-right:18px;">取消</button>
+            </td>
+        </tr>
+    </table>
+</form>

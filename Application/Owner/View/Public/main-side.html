@@ -1,0 +1,33 @@
+<ul class="ula">
+    <li><a href="{:U('Index/bwlmain')}" target="main">备忘录</a>
+    </li>
+    <li class="bg">
+        <a href="{:U('Index/index')}" target="main">系统通知</a>
+        <span class="badge">{$Think.session.rids}</span>
+    </li>
+</ul>
+<div class="ulb">
+    <ul class="listUl">    
+        <li>
+            <h3>分校设置</h3>
+            <ul>
+                <li> 
+                    <a href="{:U('/Branch/create', array('table'=>'campus'))}">创建分校校区</a>
+                </li>
+                <li> 
+                    <a href="{:U('/Branch/create', array('table'=>'user'))}">创建分校帐号</a> 
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h3>查看分校</h3>
+            <ul>
+                <foreach name='leftBranch' item='val'>
+                    <li>
+                        <a href="{:U('/branch/view', array('table'=>'main', 'bid'=>$val['id']))}">{$val.organizat}</a>
+                    </li>
+                </foreach>
+            </ul>
+        </li>
+    </ul>
+</div>

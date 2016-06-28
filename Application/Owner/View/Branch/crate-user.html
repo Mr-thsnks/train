@@ -1,0 +1,140 @@
+<table class="table table-bordered center-block" style="width:97.5%; margin-bottom:0px;">
+    <tr style="background-color:#e8e8e8;">
+        <td colspan="2" align="center">系统角色信息</td>
+    </tr>
+    <tr>
+        <td>
+            <form action="?m=Admin&c=login&a=qxzh" method="post">
+            <input type="text" name="jiaoshi" placeholder="请输入手机号码/姓名"/>
+                <input class="btn btn-info" type="submit" value="查询"/>
+                <notempty name="jiaoshi">
+                <a href="?m=Admin&c=login&a=qxzhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" class="btn btn-info">还原</a>
+                </notempty>
+            </form>
+        </td>
+        <td width="110px">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#create-user">新增</button>
+            <!-- Modal -->
+            <div class="modal fade" id="create-user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form action="{:U('__SELFURL__')}" method="post" class="validatable">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">新增角色信息</h4>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td width="120" class="text-right">真实姓名 ：</td>
+                                        <td>
+                                            <div class="col-md-10">
+                                                <input type="text" name="name" class="form-control" data-validation-engine="validate[required]">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="120" class="text-right">登陆账号 ：</td>
+                                        <td>
+                                            <div class="col-md-10">
+                                                <input type="text" name="user" class="form-control" data-validation-engine="validate[required]">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="120" class="text-right">登陆密码 ：</td>
+                                        <td>
+                                            <div class="col-md-10">
+                                                <input type="password" name="password" id="password" class="form-control" data-validation-engine="validate[required]">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="120" class="text-right">确认密码 ：</td>
+                                        <td>
+                                            <div class="col-md-10">
+                                                <input type="password" name="passwd" class="form-control" data-validation-engine="validate[required, equals[password]]">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="120" class="text-right">手机号码 ：</td>
+                                        <td>
+                                            <div class="col-md-10">
+                                                <input type="text" name="phone" class="form-control" data-validation-engine="validate[required, custom[phone]]">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="120" class="text-right">校区选择 ：</td>
+                                        <td>
+                                            <div class="col-md-10">
+                                                <select name="branch_id" class="form-control" data-validation-engine="validate[required]">
+                                                    <option value="">请选择校区</option>
+                                                    <if condition="$branch">
+                                                        <foreach name="branch" item="val">
+                                                            <option value="{$val.id}">{$val.organizat}</option>
+                                                        </foreach>
+                                                    </if>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="120" class="text-right">选择角色 ：</td>
+                                        <td>
+                                            <php>
+                                                $auth = getAuth();
+                                            </php>
+                                            <foreach name="auth" item="val">
+                                                <!-- <label for="">{$val.title}<input type="radio" name="auth[]" value="{$val.id}"></label> -->
+                                                <label class="checkbox-inline">
+                                                    <input type="radio" name="auth" value="{$val.id}"> {$val.title}
+                                                </label>
+                                            </foreach>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">取消</button>
+                                <button type="submit" class="btn btn-success">提交</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
+    <thead>
+        <tr>
+            <th>真实姓名</th>
+            <th>登录帐号</th>
+            <th>手机号码</th>
+            <th>所属校区</th>
+            <th>拥有角色</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <if condition="$results">
+        <foreach name="results" item="val">
+            <tr>
+                <td align="center">{$val.name}</td>
+                <td align="center">{$val.user}</td>
+                <td align="center">{$val.phone}</td>
+                <td align="center">{$val.branch_id|findBranch=###, 'organizat'}</td>
+                <td align="center">{$val.id|findAuth}</td>
+                <td style="width:180px; text-align:center">
+                    <a href="{:U('/branch/update', array('table'=>I('get.table'), 'id'=>$val['id']))}" class="btn btn-success btn-xs">编辑</a>
+                    <a href="{:U('/branch/del', array('table'=>I('table'), 'id'=>$val['id']))}" class="btn btn-danger btn-xs">删除</a>
+                </td>
+            </tr>
+        </foreach>
+    <else />
+        <tr>
+            <td class="text-center" colspan="99">没有任何角色信息</td>
+        </tr>
+    </if>
+</table>

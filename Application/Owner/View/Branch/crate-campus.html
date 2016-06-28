@@ -1,0 +1,113 @@
+<table class="table table-bordered center-block" style="width:97.5%; margin-bottom:0px;">
+    <tr style="background-color:#e8e8e8;">
+        <td colspan="2" align="center">校区管理</td>
+    </tr>
+    <tr>
+        <td>
+            <form class="form-inline">
+                <select class="form-control" onChange="fun(this)">
+                    <empty name="iid">
+                        <option value="sybj">- 请选择机构 -</option>
+                    </empty>
+                    <notempty name="iid">
+                        <option value="{$iid}">{$iid}</option>
+                    </notempty>
+                    <volist name="na" id="vo">
+                        <option value="{$vo.xqgl_name}">{$vo.xqgl_name}</option>
+                    </volist>
+                </select>
+                <a href="{:U('Index/xqglmain')}" class="btn btn-success">还原</a>
+            </form>
+        </td>
+        <td width="100px;">
+            <a herf="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">新增</a>
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
+    <thead>
+        <tr>
+            <th>组织机构</th>
+            <th>主负责人</th>
+            <th>负责人电话</th>
+            <th>地址</th>
+            <th>内线电话</th>
+            <th>显示顺序</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <if condition="$results">
+        <foreach name="results" item="val">
+            <tr align="center">
+                <td>{$val.organizat}</td>
+                <td>{$val.principal}</td>
+                <td>{$val.phone}</td>
+                <td>{$val.addr}</td>
+                <td>{$val.inside_call}</td>
+                <td>{$val.sort}</td>
+                <td>{$val.add_time}</td>
+                <td width="160px;">
+                    <a href="{:U('/branch/update', array('table'=>I('get.table'), 'id'=>$val['id']))}" class="btn btn-warning">编辑</a>
+                    <a href="{:U('/branch/del', array('table'=>I('get.table'), 'id'=>$val['id']))}" class="btn btn-danger" >删除</a>
+                </td>
+            </tr>
+        </foreach>
+    <else />
+        <tr align="center">
+            <td class="text-center" colspan="99">暂无任何分校</td>
+        </tr>
+    </if>
+</table>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">增加校区</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{:U('__SELFURL__')}" method="post" class="validatable">
+                    <div class="form-group">
+                        <label for="name">组织机构</label>
+                        <input type="text" class="form-control" placeholder="组织机构" name="organizat" data-validation-engine="validate[required]">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">主负责人</label>
+                        <input type="text" class="form-control" placeholder="主负责人" name="principal"  data-validation-engine="validate[required]">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">负责人电话</label>
+                        <input type="text" class="form-control" placeholder="负责人电话" name="phone" data-validation-engine="validate[required, custom[phone]]">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="name">地址</label>
+                        <input type="text" class="form-control" placeholder="地址" name="addr" data-validation-engine="validate[required]">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">内线电话</label>
+                        <input type="text" class="form-control" placeholder="内线电话" name="inside_call" data-validation-engine="validate[required]">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">显示顺序</label>
+                        <input type="text" class="form-control" placeholder="显示顺序" name="sort" data-validation-engine="validate[required, custom[integer]]" value="0">
+                    </div>
+                    <!-- 
+                    <div class="form-group">
+                        <label for="name">创建时间</label>
+                        <input type="text" class="form-control" placeholder="创建时间" name="xqgl_guoqishijian" value="{$shijian}" readonly>
+                    </div>
+                     -->
+                    <div class="modal-footer">
+                        <button class="btn btn-success" style="margin-right:20px;" type="submit">提交</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

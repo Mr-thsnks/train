@@ -1,0 +1,199 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/css/css.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/js.js"></script>
+</head>
+<body>
+    <ul class="ula">
+        <li><a href="{:U('Index/bwlmain')}" target="main">备忘录</a></li>
+        <li class="bg">
+            <a href="{:U('Index/index')}" target="main">系统通知</a>
+            <span class="badge">{$Think.session.rids}</span>
+        </li>
+    </ul>
+    <div class="ulb">
+        <ul class="listUl">
+            <li>
+                <h3>系统管理</h3>
+                <ul>
+                    <li>
+                        <a href="?m=Admin&c=Index&a=qxjsmain&zongxz={$Think.session.users}&xqid={$Think.session.xiaoquid}" target="main">角色</a>
+                    </li>
+                    <li>
+                        <a href="?m=Admin&c=Login&a=qxzhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">账号</a>
+                    </li>
+                    <li> 
+                        <a href="?m=Admin&c=Index&a=hszmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">回收站</a>
+                    </li>
+                    <li> 
+                        <a href="{:U('Index/xqglmain')}" target="main">校区管理</a>
+                    </li>
+                    <li> 
+                        <a href="{:U('login/fxqxzhmain')}"  target="main">分校帐号
+                        </a> 
+                    </li>
+                    <li> 
+                        <a href="{:U('Index/xtrzmain')}" target="main">系统日志</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>数据备份</h3>
+                <ul>
+                    <li>
+                        <a href="{:U('Index/sjbfmain')}" target="main">备份</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Index/sjhfmain')}" target="main">恢复</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="w"> 
+                <a href="?m=Admin&c=xiaoshou&a=sykhmain&xqid={$Think.session.xiaoquid}" target="main">所有客户</a> 
+            </li>
+            <li>
+                <h3>基础设置</h3>
+                <ul>
+                        <li> 
+                            <a href="?m=Admin&c=Index&a=zdszmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">字典设置</a>
+                        </li>
+                        <li>
+                            <a href="?m=Admin&c=xiaoshou&a=yhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">优惠管理</a>
+                        </li>
+                        <li>
+                            <a href="?m=Admin&c=Jiaoxue&a=kmmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">科目管理</a>
+                        </li>
+                        <li>
+                            <a href="?m=Admin&c=Jiaoxue&a=djmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">定价管理</a>
+                        </li>
+                        <li>
+                            <a href="?m=Admin&c=index&a=daoqitixing&xqid={$Think.session.xiaoquid}" target="main">到期设置</a>
+                        </li>
+                    </if>
+                </ul>
+            </li>
+            <li>
+                <h3>分校设置</h3>
+                <ul>
+                    <li> 
+                        <a href="{:U('Index/xqglmain')}" target="main">创建分校校区</a>
+                    </li>
+
+                    <li> 
+                        <a href="{:U('login/fxqxzhmain')}"  target="main">创建分校帐号</a> 
+                    </li>
+                </ul>
+            </li>
+                <li>
+                    <h3>查看分校</h3>
+                    <ul>
+                        <volist name='xiaoqugl' id='ho'>
+                            <li>
+                                <a href="?m=Admin&c=index&a=fenxiao&id={$ho.xqgl_id}" target="_black">{$ho.xqgl_name}</a>
+                            </li>
+                        </volist>
+                    </ul>
+                </li>
+            <li class="w"><a href="?m=Admin&c=index&a=index&r_id=1" target="_black">回到总校</a></li>
+                <li>
+                    <h3><a>工作统计</a></h3>
+                    <ul>
+                        <if condition="in_array('请假',$gn)">
+                            <li>
+                                <a href="?m=Admin&c=Jiaoxue&a=qjmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">请假</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Jiaoxue&a=xxmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">休学</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Index&a=cdbmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">采单表</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=sykhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">所有客户</a> 
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Index&a=schdmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">市场活动</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Index&a=schd1main&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">市场活动</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=thkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">退回客户</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=sdkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">死单客户</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=sxkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">失效客户</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=thkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">退回客户代办</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=sdkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">死单客户新进</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=sxkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">失效客户新进</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=qzkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">初始客户</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=qkkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">全款新进</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=djkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">定金新进</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=weilianxi&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">未联系</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=sxkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">最近邀约</a>
+                            </li>
+                            <li>
+                                <a href="?m=Admin&c=Xiaoshou&a=sxkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">最近到访</a>
+                            </li>
+                        </if>
+                    </ul>
+                </li> 
+            <!-- <li>
+                <if condition="in_array('市场主管桌面',$gn)">
+                    <li class="w">
+                    <a href="?m=Admin&c=index&a=shichangzhuguan&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">市场主管桌面</a>
+                    </li>
+                </if>
+                <if condition="in_array('顾问主管桌面',$gn)">
+                    <li class="w">
+                        <a href="?m=Admin&c=index&a=guwenzhuguan&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">顾问主管桌面</a>
+                    </li>
+                </if>
+                <if condition="in_array('市场桌面',$gn)">
+                    <li class="w">
+                    <a href="?m=Admin&c=index&a=shichang&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">市场桌面</a>
+                    </li>
+                </if>
+                <if condition="in_array('顾问桌面',$gn)">
+                    <li class="w">
+                    <a href="?m=Admin&c=index&a=guwen&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">顾问桌面</a>
+                    </li>
+                </if>
+                <if condition="in_array('教务桌面',$gn)">
+                    <li class="w">
+                    <a href="?m=Admin&c=index&a=jiaowu&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">教务桌面</a>
+                    </li>
+                </if>
+                <if condition="in_array('教师桌面',$gn)">
+                    <li class="w">
+                    <a href="?m=Admin&c=index&a=jiaoshi&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">教师桌面</a>
+                    </li>
+                </if>
+            </li> -->
+        </ul>
+    </div>
+</html>

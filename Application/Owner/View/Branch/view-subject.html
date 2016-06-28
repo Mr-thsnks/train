@@ -1,0 +1,61 @@
+<table class="table table-bordered center-block" style="width:97.5%; margin-bottom:0px;">
+    <tr style="background-color:#e8e8e8;">
+        <td colspan="2" align="center">续课信息</td>
+    </tr>
+    <tr>
+        <td>
+            <form class="form-inline" action="?m=Admin&c=xiaoshou&a=xkchaxun" method="post">
+                <empty name="xkchaxun">
+                    <input type="text" name="xkchaxun" placeholder="请输入姓名或手机"/>
+                </empty>
+                <notempty name="xkchaxun">
+                    <input type="text" name="xkchaxun" value="{$xkchaxun}" placeholder="请输入姓名或手机"/>
+                </notempty>
+                <input class="btn btn-info" type="submit" value="查询" />
+                <notempty name="xkchaxun">
+                    <a href="?m=Admin&c=xiaoshou&a=xkmain&id={$Think.session.userid}" class="btn btn-info">还原</a>
+                </notempty>
+            </form>
+        </td>
+        <td width="80" class="text-center">
+            <a href="{:U('/Setting/create', array('table'=>I('get.table'), 'bid'=>I('get.bid')))}" class="btn btn-sm btn-success">新增</a>
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
+    <thead>
+        <tr>                      
+            <th>科目名称</th>
+            <th>科目描述</th>
+            <th>总学时数</th>
+            <th>总课次数</th>
+            <th>上课次数/周</th>
+            <th>单次学时</th>
+            <th>考勤制度</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <if condition="$results">
+            <foreach name="results" item="val">
+                <tr align="center">
+                    <td>{$val.title}</td>
+                    <td>{$val.desc}</td>
+                    <td>{$val.total_hours}</td>
+                    <td>{$val.total_nums}</td>
+                    <td>{$val.weekly_nums}</td>
+                    <td>{$val.single_time}</td>
+                    <td>{$val.attn_system}</td>
+                    <td width="140">
+                        <a href="{:U('/setting/update', array('table'=>I('get.table'), 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-sm btn-warning">编辑</a>
+                        <a href="{:U('/setting/del', array('table'=>I('table'), 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-sm btn-danger">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+        <else />
+            <tr align="center">
+                <td colspan="99">暂无科目数据</td>
+            </tr>
+        </if>
+    </tbody>
+</table>

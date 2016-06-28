@@ -1,0 +1,38 @@
+<table class="table center-block" style="width:97%;margin-bottom:0px;">
+    <tr style="background-color:#e8e8e8;">
+        <td colspan="99" class="text-center">到期设置</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td width="80" class="text-center">
+            <a href="{:U('/Setting/create', array('table'=>I('get.table'), 'bid'=>I('get.bid')))}" class="btn btn-sm btn-success">新增</a>
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered center-block" style="width:97%;margin-top:0px;">
+    <thead>
+        <tr>
+            <th>设置天数</th>
+            <th>设置次数</th>
+            <th>设置操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <if condition="$results">
+            <foreach name="results" item="val">
+                <tr align="center">
+                    <td>{$val.days}</td>
+                    <td>{$val.nums}</td>
+                    <td width="140px">
+                        <a href="{:U('/setting/update', array('table'=>I('table'), 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-sm btn-success">编辑</a>
+                        <a href="{:U('/setting/del', array('table'=>I('table'), 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-sm btn-danger" >删除</a>
+                    </td>
+                </tr>
+            </foreach>
+        <else />
+            <tr align="center">
+                <td>暂无到期数据</td>
+            </tr>
+        </if>
+    </tbody>
+ </table>

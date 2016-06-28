@@ -1,0 +1,58 @@
+<form action="{:U('__SELFURL__')}" method="post" class="validatable">
+    <table class="table table-bordered center-block" style="width:97.5%; margin-bottom:0px;">
+        <tr>
+            <td width="140" class="text-right">真是姓名 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="name" class="form-control" value="{$result.name}"  data-validation-engine="validate[required]"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">登录密码 ：</td>
+            <td>
+                <div class="col-md-10"><input type="passowrd" name="principal" id="passowrd" class="form-control"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">确认密码 ：</td>
+            <td>
+                <div class="col-md-10"><input type="passowrd" name="passwd" class="form-control" data-validation-engine="validate[equals[password]]"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">手机号码 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="phone" class="form-control" value="{$result.phone}"  data-validation-engine="validate[required, custom[phone]]"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">所属校区 ：</td>
+            <td>
+                <div class="col-md-10">
+                    <select name="branch_id" class="form-control" data-validation-engine="validate[required]">
+                        <option value="">请选择校区</option>
+                        <if condition="$branch">
+                            <foreach name="branch" item="val">
+                                <option value="{$val.id}">{$val.organizat}</option>
+                            </foreach>
+                        </if>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">角色 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="sort" class="form-control" value="{$result.sort}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">&nbsp;</td>
+            <td>
+                <div class="col-md-10">
+                    <button type="submit" class="btn btn-sm btn-success">保存</button>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:history.back(-1);">取消</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

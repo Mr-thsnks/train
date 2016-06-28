@@ -1,0 +1,12 @@
+[ 2016-06-20T16:58:52+08:00 ] 127.0.0.1 /Branch/create.html?table=campus
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000188s ]
+NOTIC: [2] preg_replace(): Delimiter must not be alphanumeric or backslash /usr/local/var/www/ThinkPHP/Library/Think/Dispatcher.class.php 第 138 行.
+
+[ 2016-06-20T16:58:55+08:00 ] 127.0.0.1 /Branch/create.html?table=campus
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000159s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000713s ]
+NOTIC: [2] preg_replace(): Delimiter must not be alphanumeric or backslash /usr/local/var/www/ThinkPHP/Library/Think/Dispatcher.class.php 第 138 行.
+
