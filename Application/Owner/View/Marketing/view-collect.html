@@ -1,1 +1,132 @@
-view-collect.html
+<form class="form-inline inline1" action="__APP__?m=Index&a=cdxc" method="post">
+    <h2 class="lmbt">客户信息</h2>
+    <table class="center-block" style="width:97.5%; margin-bottom:10px;">
+        <tr>
+            <td> 
+                <input type="hidden" name="xqid" value="{$Think.session.xiaoquid}">
+                    <label for="name">活动/来源查询：</label>
+                    <select class="form-control" name="huodongcx">
+                        <empty name="dhid">
+                            <option value="">- 请选择活动 -</option>
+                        </empty>
+                        <notempty name="dhid">
+                            <option value="{$dhid}">{$dhid}</option>
+                        </notempty>
+                        <empty name="dhid">
+                            <volist name="listte" id="vo">
+                                <option>{$vo.s_xiangguanhuodong}</option>
+                            </volist>
+                        </empty>
+                        <notempty name="dhid">
+                            <volist name="listtec" id="vo">
+                                <option>{$vo.s_xiangguanhuodong}</option>
+                            </volist>
+                        </notempty>
+                    </select>
+
+                    <select class="form-control" name="laiyuancx">
+                        <empty name="iid">
+                            <option value="">- 请选择信息来源 -</option>
+                        </empty>
+                        <notempty name="iid">
+                            <option value="{$iid}">{$iid}</option>
+                        </notempty>
+                        <empty name="iid">
+                            <volist name="liste" id="vo">
+                                <option>{$vo.s_laiyuan}</option>
+                            </volist>
+                        </empty>
+
+                        <notempty name="iid">
+                            <volist name="listec" id="vo">
+                                <option>{$vo.s_laiyuan}</option>
+                            </volist>
+                        </notempty>
+
+                    </select>
+                    <input class="btn btn-info" type="submit" value="查询" />
+                    <a href="?m=Admin&c=Index&a=cdbmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" class="btn btn-info">还原</a>
+                </form>
+                <form class="form-inline inline1" action="__APP__?m=Index&a=xmdh" method="post">
+                    <empty name="xmdh">
+                        <input type="text" name="xmdh" placeholder="请输入手机号码或姓名"/>
+                    </empty>
+                    <notempty name="xmdh">
+                        <input type="text" value="{$xmdh}" />
+                    </notempty>
+                    <input class="btn btn-info" type="submit" value="查询" />
+                    <notempty name="xmdh">
+                    <a href="?m=Admin&c=Index&a=cdbmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}"class="btn btn-info">还原</a>
+                    </notempty>
+                </form>
+                <form class="form-inline inline1" style="margin-left:15px;" action="__APP__?m=Index&a=fenpei" method="post">
+                <input type="hidden" name="uid" value="{$Think.session.userid}">
+                <if condition="in_array('分配权限',$gn)">
+                    <select class="form-control" name="guwen">
+                        <option value="跳过">-请选择课程顾问-</option>
+                        <volist name="listq" id="go">
+                            <?php if(strpos($go['r_id'],'5')!==false){  ?>
+                            <option value="{$go.u_id}">{$go.u_users}</option>
+                            <?php   }?>
+                        </volist>
+                    </select>
+                    <input class="btn btn-info" type="submit" value="批量分配" onclick="jlls()"/>
+                </if>
+            </td>
+        </tr>
+    </table>
+    <script>
+    function jlls() {  
+        if(window.confirm('确实要分配吗？')){
+            //alert("确定");
+            //window.location.href='__APP__?m=Index&a=fenpei';
+            return true;
+        }else{
+            //alert("取消");
+            return false;
+        }
+    }//del end
+    </script>
+    <table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
+        <thead>
+            <tr>
+                <th>相关活动</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>联系人姓名</th>
+                <th>手机号码</th>
+                <th>采单员</th>
+                <th>采单日期</th>
+                <th>采单地点</th>
+                <th>信息来源</th>
+                <th>转换进度</th>
+                <th>状态</th>
+                <th>客户等级</th>
+            </tr>
+        </thead>
+        <volist name="list" id="vo">
+        <if condition="$vo.s_weizhi eq 采单表">
+            <tr>
+                <td>
+                    <input name="a_id[]" type="checkbox" value="{$vo.s_id}">
+                    {$vo.s_xiangguanhuodong}
+                </td>
+                <td>
+                    <a href="?m=Admin&c=Jiaoxue&a=xyxxmain&id={$vo.s_id}&aid={$Think.session.userid}" target="main">{$vo.s_name}</a>
+                </td>
+                <td>{$vo.s_sex}</td>
+                <td>{$vo.s_jiazhang}</td>
+                <td>{$vo.s_phone}</td>
+                <td>{$vo.s_caidanyuan}</td>
+                <td>{$vo.s_caidan}</td>
+                <td>{$vo.s_caidandizhi}</td>
+                <td>{$vo.s_laiyuan}</td>
+                <td>{$vo.s_zhuanhuan}</td>
+                <td>{$vo.s_zhuangtai}</td>
+                <td>{$vo.s_kehudengji}</td>
+            </tr>
+        </if>
+        </volist>
+    </table>
+</form>
+    

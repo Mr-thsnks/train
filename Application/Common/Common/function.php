@@ -1,5 +1,22 @@
 <?php
 
+function chkValue($variable, $filter = []){
+    foreach ($variable as $key => $value) {
+        if(is_array($filter) && !empty($filter)){
+            foreach ($filter as $val) {
+                if($value != '' && $key != $val){
+                    return true;
+                }
+            }
+        }else{
+            if($value != '' && $key != $val){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 function getAuth(){
     $authGroup = M('auth_group');
     $results = $authGroup->where('id > 1')->field('id, title')->select();

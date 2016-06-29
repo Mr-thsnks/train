@@ -5,7 +5,7 @@
             <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 + 客户基本资料
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+            <div class="panel-collapse collapse in" role="tabpanel"
             aria-labelledby="headingOne">
                 <div class="panel-body">
                     <table class="table table-bordered">
@@ -74,11 +74,16 @@
                             <td width="100" class="text-right">客户等级：</td>
                             <td colspan="1">
                                 <select class="form-control" name="level">
-                                    <option disabled="disabled">-请选择等级-</option>
+                                    <foreach name="clientLevel" item="vo">
+                                        <option value="{$vo.name1}">{$vo.name1}</option>
+                                        <option value="{$vo.name2}">{$vo.name2}</option>
+                                        <option value="{$vo.name3}">{$vo.name3}</option>
+                                        <option value="{$vo.name4}">{$vo.name4}</option>
+                                    </foreach>
                                 </select>
                             </td>
                             <td width="100" class="text-right">备注：</td>
-                            <td><input type="text" class="form-control" name="s_beizhun"></td>
+                            <td><input type="text" class="form-control" name="remark"></td>
                             <td></td>
                             <td colspan="1"></td>
                         </tr>
@@ -93,7 +98,7 @@
                     （*注意：联系方式将作为手机端登录帐号，请您必须填写！）
                 </span> -->
             </div>
-            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                 <div class="panel-body">
                     <table class="table table-bordered">
                         <tr>
@@ -158,18 +163,23 @@
             <div class="panel-heading" role="tab" id="headingThree" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                 + 市场信息
             </div>
-            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
                 <div class="panel-body">
                     <table class="table table-bordered">
                         <tr>
                             <td width="100" class="text-right">信息来源：</td>
                             <td colspan="1">
-                                <select class="form-control" name="branch_dict_id">
-                                    <option value="">- 请选择来源 -</option>
+                                <select class="form-control" name="branch_dict">
+                                    <foreach name="infoSources" item="vo">
+                                        <option value="{$vo.name1}">{$vo.name1}</option>
+                                        <option value="{$vo.name2}">{$vo.name2}</option>
+                                        <option value="{$vo.name3}">{$vo.name3}</option>
+                                        <option value="{$vo.name4}">{$vo.name4}</option>
+                                    </foreach>
                                 </select>
                             </td>
                             <td width="100" class="text-right">相关活动：</td>
-                            <td><input type="text" class="form-control" name="branch_event_id" value="{$hdname}"></td>
+                            <td><input type="text" class="form-control" name="branch_event" value="{$hdname}"></td>
                             <td width="100" class="text-right">采单日期：</td>
                             <td colspan="1"><input class="form-control Wdate" type="text" name="collection_date" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly></td>
                             <td width="100" class="text-right">采单地址：</td>
@@ -183,7 +193,7 @@
             <div class="panel-heading" role="tab" id="heading4" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
                 + 销售信息
             </div>
-            <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
+            <div class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading4">
                 <div class="panel-body">
                     <table class="table table-bordered">
                         <tr>
@@ -201,8 +211,8 @@
                             <td><input type="text" class="form-control" name="visiting_num" readonly></td>
                         </tr>
                         <tr>
-                            <td width="120" class="text-right"><a herf="button" class="btn btn-default" data-toggle="modal" data-target="#jsr">介绍人</a></td>
-                            <td><input type="text" class="form-control" placeholder="点击左侧介绍人按钮选择介绍人" name="introducer"></td>
+                            <td width="120" class="text-right">介绍人：</td>
+                            <td><input type="text" class="form-control" placeholder="填写介绍人手机号码" name="introducer"></td>
                             <td width="120" class="text-right">是否联系：</td> <!-- 是 or 否 -->
                             <td><input type="text" class="form-control" name="s_shifoulx" readonly></td>
                         </tr>
@@ -210,11 +220,11 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-default">
+       <!--  <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="heading5" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
                 + 系统信息
             </div>
-            <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
+            <div class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading5">
                 <div class="panel-body">
                     <table class="table table-bordered">
                         <tr>
@@ -230,7 +240,8 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <input type="submit" class="btn btn-success center-block" value="保存" />
+    <div style="height:200px"></div>
 </form>

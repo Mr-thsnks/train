@@ -31,6 +31,7 @@
                 <label for="name">活动类型:</label>
                 <select class="form-control" name="type" data-validation-engine="validate[required]">
                     <option style="color:blue;">{$event.type}</option>
+
                     <volist name="eventType" id="so">
                         <option value="{$so.name1}">{$so.name1}</option>
                         <option value="{$so.name2}">{$so.name2}</option>

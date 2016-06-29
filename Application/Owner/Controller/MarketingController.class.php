@@ -11,6 +11,7 @@ class MarketingController extends BaseController
     private $studentMarketing;
     private $studentSales;
     private $studentOperation;
+    private $branchDict;
     public function _initialize()
     {
         parent::_initialize();
@@ -30,11 +31,33 @@ class MarketingController extends BaseController
         $memList = $Member->where($map)->select();
         $this->assign('memList', $memList);
         //活动种类
-        $branchDict = M('branchDict');
-        $map['branch_id'] = I('get.bid');
-        $map['class'] = "活动类型";
-        $eventType = $branchDict->where($map)->select();
-        $this->assign('eventType', $eventType);
+        $this->branchDict = M('branch_dict');
+        $dictMap['branch_id'] = $map['branch_id'];
+        $eventDict = $this->branchDict->where($map)->select();
+        //客户等级
+        $dict = [];
+        foreach ($eventDict as $key => $val) {
+            switch ($val['class']) {
+                case '客户等级':
+                    $dict[0][] = $val;
+                    break;
+                case '信息来源':
+                    $dict[1][] = $val;
+                    break;
+                case '活动类型':
+                    $dict[2][] = $val;
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+            
+        }
+        $this->assign('clientLevel', $dict[0]);
+        $this->assign('infoSources', $dict[1]);
+        $this->assign('eventType', $dict[2]);
+
     }
 
     public function index()
@@ -161,6 +184,8 @@ class MarketingController extends BaseController
         if (IS_POST) {
             $studentRules = [
                 ['name', 'require', '姓名必填'],
+                ['phone', 'require', '联系方式必填'],
+                ['intention', 'require', '意向科目必填'],
             ];
             if(!$studentData = $this->Student->validate($studentRules)->create()){
                 $this->alert($this->Student->getError());
@@ -168,21 +193,21 @@ class MarketingController extends BaseController
             }
             $familyData = $this->studentFamily->create();
             $marketingData = $this->studentMarketing->create();
-            $familyData = $this->studentSales->create();
-            $operationData = $this->studentOperation->create();
+            $salesData = $this->studentSales->create();
             $studentId = $this->Student->add($studentData);
 
             $familyData['student_id'] = $studentId;
             $marketingData['student_id'] = $studentId;
-            $familyData['student_id'] = $studentId;
+            $salesData['student_id'] = $studentId;
+            $operationData['create_user'] = session('UID');
             $operationData['student_id'] = $studentId;
-
             $this->studentFamily->add($familyData);
             $this->studentMarketing->add($marketingData);
-            $this->studentSales->add($familyData);
             $this->studentOperation->add($operationData);
+            $this->studentSales->add($salesData);
             chkStatus($studentId, '导入成功', '导入失败', '/marketing/view.html?table=collect&bid=' . $bid);
         }
+
         $this->display('import-' . $table);
     }
 }
