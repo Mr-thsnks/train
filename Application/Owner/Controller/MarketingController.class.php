@@ -159,7 +159,13 @@ class MarketingController extends BaseController
     public function import(string $table, int $bid)
     {
         if (IS_POST) {
-            $studentData = $this->Student->create();
+            $studentRules = [
+                ['name', 'require', '姓名必填'],
+            ];
+            if(!$studentData = $this->Student->validate($studentRules)->create()){
+                $this->alert($this->Student->getError());
+                return false;
+            }
             $familyData = $this->studentFamily->create();
             $marketingData = $this->studentMarketing->create();
             $familyData = $this->studentSales->create();
