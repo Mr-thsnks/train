@@ -160,21 +160,22 @@ class MarketingController extends BaseController
     {
         if (IS_POST) {
             $studentData = $this->Student->create();
-            $studentId = $this->Student->add($studentData);
             $familyData = $this->studentFamily->create();
-            $familyData['student_id'] = $studentId;
             $marketingData = $this->studentMarketing->create();
-            $marketingData['student_id'] = $studentId;
             $familyData = $this->studentSales->create();
-            $familyData['student_id'] = $studentId;
             $operationData = $this->studentOperation->create();
+            $studentId = $this->Student->add($studentData);
+
+            $familyData['student_id'] = $studentId;
+            $marketingData['student_id'] = $studentId;
+            $familyData['student_id'] = $studentId;
             $operationData['student_id'] = $studentId;
-            _print($studentData);
-            _print($familyData);
-            _print($marketingData);
-            _print($salesData);
-            _print($operationData);
-            die;
+
+            $this->studentFamily->add($familyData);
+            $this->studentMarketing->add($marketingData);
+            $this->studentSales->add($familyData);
+            $this->studentOperation->add($operationData);
+            chkStatus($studentId, '导入成功', '导入失败', '/marketing/view.html?table=collect&bid=' . $bid);
         }
         $this->display('import-' . $table);
     }
