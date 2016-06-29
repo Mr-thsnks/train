@@ -29,7 +29,7 @@
                 <td>{$val.user|findMember=###, 'name'}</td>
                 <td>{$val.status_text}</td>
                 <td width="260" class="text-center">
-                    <a href="#" class="btn btn-sm btn-success" >导入客户</a>
+                    <a href="{:U('/matketing/', array('table'=>))}" class="btn btn-sm btn-success" >导入客户</a>
                     <a href="{:U('/marketing/update', array('table'=>'event', 'bid'=>I('get.bid'), 'id'=>$val['id']))}" class="btn btn-sm btn-warning" >更新</a>
                     <a href="{:U('/marketing/eventDel', array('table'=>'event', 'bid'=>I('get.bid') ,'id'=>$val['id']))}" class="btn btn-sm btn-danger" onclick="if(confirm('确定要删除这次活动吗？')==false)return false;" >删除</a>
                 </td>
