@@ -160,10 +160,15 @@ class MarketingController extends BaseController
     {
         if (IS_POST) {
             $studentData = $this->Student->create();
+            $studentId = $this->Student->add($studentData);
             $familyData = $this->studentFamily->create();
+            $familyData['student_id'] = $studentId;
             $marketingData = $this->studentMarketing->create();
-            $salesData = $this->studentSales->create();
+            $marketingData['student_id'] = $studentId;
+            $familyData = $this->studentSales->create();
+            $familyData['student_id'] = $studentId;
             $operationData = $this->studentOperation->create();
+            $operationData['student_id'] = $studentId;
             _print($studentData);
             _print($familyData);
             _print($marketingData);
