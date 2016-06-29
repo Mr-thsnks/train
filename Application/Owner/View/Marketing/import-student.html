@@ -1,0 +1,238 @@
+<form action="{:U('__SELFURL__', I('get.'))}" method="post">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                + 客户基本资料
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+            aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="100" class="text-right">姓名：</td>
+                            <td>
+                                <input type="text" class="form-control" name="name">
+                            </td>
+                            <td width="100" class="text-right">
+                                性别：
+                            </td>
+                            <td>
+                                <select class="form-control" name="sex">
+                                    <option value="">-请选择修改-</option>
+                                    <option value="1">男</option>
+                                    <option value="0">女</option>
+                                </select>
+                            </td>
+                            <td width="100" class="text-right">出生日期：</td>
+                            <td colspan="1"><input class="form-control Wdate" type="text" name="date_of_birth" onClick="WdatePicker()" readonly></td>
+                            <td width="100" class="text-right">身高：</td>
+                            <td>
+                                <input type="text" class="form-control" name="height">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100" class="text-right">体重：</td>
+                            <td><input type="text" class="form-control" name="weight"></td>
+                            <td width="100" class="text-right">血型：</td>
+                            <td>
+                                <input type="text" class="form-control" name="blood_type">
+                            </td>
+                            <td width="100" class="text-right">健康情况：</td>
+                            <td><input type="text" class="form-control" name="health"></td>
+                            <td width="100" class="text-right">婚姻状况：</td>
+                            <td>
+                                <select class="form-control" name="marital">
+                                    <option value="">-请选择状况-</option>
+                                    <option value="0">未婚</option>
+                                    <option value="1">已婚</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100" class="text-right">籍贯：</td>
+                            <td><input type="text" class="form-control" name="native_place"></td>
+                            <td width="100" class="text-right">民族：</td>
+                            <td><input type="text" class="form-control" name="nation"></td>
+                            <td width="100" class="text-right">政治面貌：</td>
+                            <td><input type="text" class="form-control" name="regulation"></td>
+                            <td width="100" class="text-right">学历：</td>
+                            <td><input type="text" class="form-control" name="degree"></td>
+                        </tr>
+                        <tr>
+                            <td width="100" class="text-right">身份证号：</td>
+                            <td colspan="3"><input type="text" class="form-control" name="id_no"></td>
+                            <!-- <td>学校/幼儿园/单位：</td> -->
+                            <!-- <td><input type="text" class="form-control" name="s_danwei"></td> -->
+                            <td width="100" class="text-right">性格：</td>
+                            <td><input type="text" class="form-control" name="character"></td>
+                            <td width="100" class="text-right">爱好：</td>
+                            <td><input type="text" class="form-control" name="hobby"></td>
+                        </tr>
+                        <tr>
+                            <td width="100" class="text-right">培训经历：</td>
+                            <td><input type="text" class="form-control" name="training_exp"></td>
+                            <td width="100" class="text-right">意向科目：</td>
+                            <td><input type="text" class="form-control" name="intention"></td>
+                            <td width="100" class="text-right">客户等级：</td>
+                            <td colspan="1">
+                                <select class="form-control" name="level">
+                                    <option disabled="disabled">-请选择等级-</option>
+                                </select>
+                            </td>
+                            <td width="100" class="text-right">备注：</td>
+                            <td><input type="text" class="form-control" name="s_beizhun"></td>
+                            <td></td>
+                            <td colspan="1"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                + 家庭联系方式
+                <span style="font-size: 12px; color: red;">
+                    （*注意：联系方式将作为手机端登录帐号，请您必须填写！）
+                </span>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="120" class="text-right">联系人姓名：</td>
+                            <td><input type="text" class="form-control" name="contact"></td>
+                            <td width="120" class="text-right">紧急联系人：</td>
+                            <td><input type="text" class="form-control" name="contact_emerg"></td>
+                            <td width="120" class="text-right">紧急联系电话：</td>
+                            <td><input type="text" class="form-control" name="contact_emerg_phone"></td>
+                            <!-- <td rowspan="4" colspan="2"> </td> -->
+                        </tr>
+                        <tr>
+                            <td width="120" class="text-right">联系方式：</td>
+                            <td><input type="text" class="form-control" name="contact_phone"></td>
+                            <td width="120" class="text-right">邮编：</td>
+                            <td><input type="text" class="form-control" name="zip_code"></td>
+                            <td width="120" class="text-right">电子邮箱：</td>
+                            <td><input type="text" class="form-control" name="email"></td>
+                        </tr>
+                        <td width="120" class="text-right">QQ：</td>
+                        <td><input type="text" class="form-control" name="qq"></td>
+                        <td width="120" class="text-right">微信号：</td>
+                        <td><input type="text" class="form-control" name="wechat"></td>
+                        <td width="120" class="text-right">其他：</td>
+                        <td><input type="text" class="form-control" name="other"></td>
+                        </tr>
+                        <tr>
+                            <td width="120" class="text-right">家庭住址：</td>
+                            <td colspan="5"><input type="text" class="form-control" name="addr"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading6" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                + 状态信息
+            </div>
+            <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                学员转换进度：
+                            </td>
+                            <td colspan="5">
+                                <input type="text" id="intro" class="form-control" name="s_zhuangtai"
+                                readonly>
+                            </td>
+                            <td>
+                                状态
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="s_zhuanhuan">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div> -->
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                + 市场信息
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="100" class="text-right">信息来源：</td>
+                            <td colspan="1">
+                                <select class="form-control" name="branch_dict_id">
+                                    <option value="">- 请选择来源 -</option>
+                                </select>
+                            </td>
+                            <td width="100" class="text-right">相关活动：</td>
+                            <td><input type="text" class="form-control" name="branch_event_id" value="{$hdname}"></td>
+                            <td width="100" class="text-right">采单日期：</td>
+                            <td colspan="1"><input class="form-control Wdate" type="text" name="collection_date" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly></td>
+                            <td width="100" class="text-right">采单地址：</td>
+                            <td><input type="text" class="form-control" name="collection_location"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading4" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                + 销售信息
+            </div>
+            <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="120" class="text-right">跟进顾问：</td>
+                            <td>
+                                <select class="form-control" name="adviser">
+                                    <option value="" selected>- 请选择顾问 -</option>
+                                </select>
+                            </td>
+                            <td width="120" class="text-right">最近联系日期：</td>
+                            <td colspan="1"><input type="text" class="form-control" name="contact_recent" readonly></td>
+                            <td width="120" class="text-right">邀约次数：</td>
+                            <td><input type="text" class="form-control" name="interview_num" readonly></td>
+                            <td width="120" class="text-right">到访次数：</td>
+                            <td><input type="text" class="form-control" name="visiting_num" readonly></td>
+                        </tr>
+                        <tr>
+                            <td width="120" class="text-right"><a herf="button" class="btn btn-default" data-toggle="modal" data-target="#jsr">介绍人</a></td>
+                            <td><input type="text" class="form-control" placeholder="点击左侧介绍人按钮选择介绍人"name="introducer"></td>
+                            <td width="120" class="text-right">是否联系：</td> <!-- 是 or 否 -->
+                            <td><input type="text" class="form-control" name="s_shifoulx" readonly></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading5" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                + 系统信息
+            </div>
+            <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="120" class="text-right">创建人：</td>
+                            <td><input type="text" class="form-control" name="create_user" readonly></td>
+                            <td width="120" class="text-right">创建日期：</td>
+                            <td><input type="text" class="form-control" name="create_time" readonly></td>
+                            <td width="120" class="text-right">修改人：</td>
+                            <td><input type="text" class="form-control" name="update_user" readonly></td>
+                            <td width="120" class="text-right">修改日期：</td>
+                            <td><input type="text" class="form-control" name="update_time" readonly></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-success center-block" value="保存" />
+</form>

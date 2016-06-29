@@ -6,12 +6,24 @@ class MarketingController extends BaseController
     private $Event;
     private $eventActual;
     private $eventOperation;
+    private $Student;
+    private $studentFamily;
+    private $studentMarketing;
+    private $studentSales;
+    private $studentOperation;
     public function _initialize()
     {
         parent::_initialize();
         $this->Event = M('Event');
         $this->eventActual = M('event_actual');
         $this->eventOperation = M('event_operation');
+
+        $this->Student = M('Student');
+        $this->studentFamily = M('student_family');
+        $this->studentMarketing = M('student_marketing');
+        $this->studentSales = M('student_sales');
+        $this->studentOperation = M('student_operation');
+
         //活动负责人
         $Member = M('Member');
         $map['branch_id'] = I('get.bid');
@@ -35,7 +47,7 @@ class MarketingController extends BaseController
         $map['branch_id'] = I('get.bid');
         $results = $this->Event->where($map)->order('id desc')->select();
         int2string($results, [
-            'status' => ['0' => '取消', '1'=>'进行中', '2'=>'已结束'],
+            'status' => ['0' => '取消', '1' => '进行中', '2' => '已结束'],
         ]);
         $this->assign('results', $results);
         $this->display('view-' . $table);
@@ -71,27 +83,28 @@ class MarketingController extends BaseController
         $map['class'] = "活动类型";
         $eventType = $branchDict->where($map)->select();
         $this->assign('eventType', $eventType);
-        
+
         $this->display('create-' . $table);
     }
 
-    public function update(string $table , int $bid){
-        $map['id'] = I('get.id'); 
+    public function update(string $table, int $bid)
+    {
+        $map['id'] = I('get.id');
         $event = $this->Event->where($map)->find();
         $eventMap['event_id'] = $event['id'];
         $eventActual = $this->eventActual->where($eventMap)->find();
-        $eventOperation = $this->eventOperation->where($eventMap)->find(); 
+        $eventOperation = $this->eventOperation->where($eventMap)->find();
 
         //dump($eventActual);
-        $this->assign('event' , $event);
-        $this->assign('eventActual' , $eventActual);
-        $this->assign('eventOperation' , $eventOperation);
+        $this->assign('event', $event);
+        $this->assign('eventActual', $eventActual);
+        $this->assign('eventOperation', $eventOperation);
 
         //上面试展示原有信息，下面是获取保存信息
-        if(IS_POST){
+        if (IS_POST) {
             $updateData['title'] = I('post.title');
             $updateData['location'] = I('post.location');
-            $updateData['type'] =  I('post.type');
+            $updateData['type'] = I('post.type');
             $updateData['time_begin'] = I('post.time_begin');
             $updateData['time_end'] = I('post.time_end');
             $updateData['projected_costs'] = I('post.projected_costs');
@@ -103,7 +116,7 @@ class MarketingController extends BaseController
             $updateData['branch_id'] = I('get.bid');
             $updateData['status'] = I('post.status');
             $statusEvent = $this->Event->where($map)->save($updateData);
-            if($statusEvent === false){
+            if ($statusEvent === false) {
                 $this->alert('更新失败');
             }
             $actualData['time_begin_actual'] = I('time_begin_actual');
@@ -115,11 +128,11 @@ class MarketingController extends BaseController
             if (!$chkData) {
                 $actualData['event_id'] = $event['id'];
                 $statusEventActual = $this->eventActual->add($actualData);
-            }else{
+            } else {
                 $statusEventActual = $this->eventActual->where($eventMap)->save($actualData);
             }
 
-            if(false === $statusEventActual){
+            if (false === $statusEventActual) {
                 $this->alert('更新失败');
             }
 
@@ -130,10 +143,10 @@ class MarketingController extends BaseController
             chkStatus($statusEventActual, '更新成功', '更新失败', '/marketing/view.html?table=' . $table . '&bid=' . $bid);
         }
 
-
-        $this->display('update-'.$table);
+        $this->display('update-' . $table);
     }
-    public function eventDel(string $table, int $bid){
+    public function eventDel(string $table, int $bid)
+    {
         $evtId = I('get.id');
         $map['id'] = $evtId;
         $eventMap['event_id'] = $evtId;
@@ -141,5 +154,23 @@ class MarketingController extends BaseController
         $statusActual = $this->eventActual->where($eventMap)->delete();
         $statusEvent = $this->Event->where($map)->delete();
         chkStatus($statusEvent, '删除成功', '删除失败', '/marketing/view.html?table=' . $table . '&bid=' . $bid);
+    }
+
+    public function import(string $table, int $bid)
+    {
+        if (IS_POST) {
+            $studentData = $this->Student->create();
+            $familyData = $this->studentFamily->create();
+            $marketingData = $this->studentMarketing->create();
+            $salesData = $this->studentSales->create();
+            $operationData = $this->studentOperation->create();
+            _print($studentData);
+            _print($familyData);
+            _print($marketingData);
+            _print($salesData);
+            _print($operationData);
+            die;
+        }
+        $this->display('import-' . $table);
     }
 }
