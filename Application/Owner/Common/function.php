@@ -1,11 +1,18 @@
 <?php
 
-// function findMember(int $id, string $filter){
-//     $Member = M('Member');
-//     $map['id'] = $id;
-//     $result = $Member->where($map)->field($filter)->find();
-//     return $result[$filter];
-// }
+function findStudentInfo(string $table, int $id, string $filter){
+    $Table = M($table);
+    $map['student_id'] = $id;
+    $result = $Table->where($map)->field($filter)->find();
+    return $result[$filter];
+}
+
+function findStudentCreateUser(int $id, string $filter){
+    $Table = M('student_operation');
+    $map['student_id'] = $id;
+    $result = $Table->where($map)->field($filter)->find();
+    return $result[$filter];
+}
 
 function findBranch(int $id, string $filter)
 {

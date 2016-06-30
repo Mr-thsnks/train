@@ -99,34 +99,32 @@
                 <th>采单日期</th>
                 <th>采单地点</th>
                 <th>信息来源</th>
-                <th>转换进度</th>
-                <th>状态</th>
                 <th>客户等级</th>
             </tr>
         </thead>
-        <volist name="list" id="vo">
-        <if condition="$vo.s_weizhi eq 采单表">
+        <if condition="$results">
+            <foreach name="results" item="val">
+                <tr>
+                    <td>
+                        <input name="id[]" type="checkbox" value="{$val.id}">
+                        {$val.id|findStudentInfo='student_marketing',###, 'branch_dict'}
+                    </td>
+                    <td class="text-center">{$val.name}</td>
+                    <td class="text-center">{$val.sex_text}</td>
+                    <td class="text-center">{$val.id|findStudentInfo='student_family', ###, 'contact'}</td>
+                    <td class="text-center">{$val.id|findStudentInfo='student_family', ###, 'contact_phone'}</td>
+                    <td class="text-center">{$val.id|findStudentInfo='student_operation', ###, 'create_user'|findMember=###, 'name'}</td>
+                    <td class="text-center">{$val.id|findStudentInfo='student_marketing', ###, 'collection_date'}</td>
+                    <td class="text-center">{$val.id|findStudentInfo='student_marketing', ###, 'collection_location'}</td>
+                    <td class="text-center">{$val.id|findStudentInfo='student_marketing', ###, 'branch_dict'}</td>
+                    <td class="text-center">{$val.level}</td>
+                </tr>
+            </foreach>
+        <else />
             <tr>
-                <td>
-                    <input name="a_id[]" type="checkbox" value="{$vo.s_id}">
-                    {$vo.s_xiangguanhuodong}
-                </td>
-                <td>
-                    <a href="?m=Admin&c=Jiaoxue&a=xyxxmain&id={$vo.s_id}&aid={$Think.session.userid}" target="main">{$vo.s_name}</a>
-                </td>
-                <td>{$vo.s_sex}</td>
-                <td>{$vo.s_jiazhang}</td>
-                <td>{$vo.s_phone}</td>
-                <td>{$vo.s_caidanyuan}</td>
-                <td>{$vo.s_caidan}</td>
-                <td>{$vo.s_caidandizhi}</td>
-                <td>{$vo.s_laiyuan}</td>
-                <td>{$vo.s_zhuanhuan}</td>
-                <td>{$vo.s_zhuangtai}</td>
-                <td>{$vo.s_kehudengji}</td>
+                <td colspan="99" class="text-center">暂无任何数据</td>
             </tr>
         </if>
-        </volist>
     </table>
 </form>
     

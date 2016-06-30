@@ -68,11 +68,17 @@ class MarketingController extends BaseController
     public function view(string $table)
     {
         $map['branch_id'] = I('get.bid');
-        $results = $this->Event->join('LEFT JOIN t_event_actual ON t_event.id = t_event_actual.event_id')->where($map)->field('t_event.id, t_event.title, t_event_actual.quantity_actual, t_event.time_begin, t_event.time_end, t_event.user, t_event.status')->order('t_event.id desc')->select();
-
-        int2string($results, [
-            'status' => ['0' => '取消', '1' => '进行中', '2' => '已结束'],
-        ]);
+        if ($table == 'event') {
+            $results = $this->Event->join('LEFT JOIN t_event_actual ON t_event.id = t_event_actual.event_id')->where($map)->field('t_event.id, t_event.title, t_event_actual.quantity_actual, t_event.time_begin, t_event.time_end, t_event.user, t_event.status')->order('t_event.id desc')->select();
+            int2string($results, [
+                'status' => ['0' => '取消', '1' => '进行中', '2' => '已结束'],
+            ]);
+        }else{
+            $results = $this->Student->order('id desc')->select();
+            int2string($results, [
+                'sex' => ['0' => '女', '1' => '男'],
+            ]);
+        }
         $this->assign('results', $results);
         $this->display('view-' . $table);
     }
