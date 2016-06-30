@@ -276,7 +276,111 @@
 </div>
             <div>
                 <div class="hint"></div>
-                view-collect.html
+                
+    <h2 class="lmbt">客户信息</h2>
+    <table class="center-block" style="width:97.5%; margin-bottom:10px;">
+        <tr>
+            <td>
+                <form class="form-inline inline1" action="<?php echo U('', I('get.'));?>" method="get">
+                    <label for="name">活动/来源查询：</label>
+                    <select class="form-control" onchange="searchDict(this)">
+                        <?php if(!empty($eventTitle)): ?><option value="<?php echo U('', 'table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_dict'=>I('get.branch_dict')]);?>">请选择活动</option>
+                            <?php if(is_array($eventTitle)): foreach($eventTitle as $key=>$val): echo I('get.branch_evt');?>
+                                <?php echo ($val["id"]); ?>
+                                <?php if(I('get.branch_evt') == $val.id): ?>12312sdfasd
+                                    <option value="<?php echo U('', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_evt'=>$val['id'], 'branch_dict'=>I('get.branch_dict')]);?>" selected><?php echo ($val["title"]); ?></option>
+                                <?php else: ?>
+                                    <option value="<?php echo U('', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_evt'=>$val['id'], 'branch_dict'=>I('get.branch_dict')]);?>"><?php echo ($val["title"]); ?></option><?php endif; endforeach; endif; endif; ?>
+                    </select>
+
+                    <?php if(($_GET['branch_dict']) == "infoSources.0.name4"): ?>selected<?php endif; ?>
+                    <select class="form-control" style="margin-left:20px" onchange="searchDict(this)">
+                        <option value="<?php echo U('', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_evt'=>I('get.branch_evt')]);?>">请选择来源</option>
+                        <option value="<?php echo U('', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_dict'=>$infoSources['0']['name1'], 'branch_evt'=>I('get.branch_evt')]);?>" <?php if(urlencode($infoSources[0]['name1']) == urlencode(I('get.branch_dict'))){echo 'selected';}?>><?php echo ($infoSources["0"]["name1"]); ?></option>
+                        <option value="<?php echo U('', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_dict'=>$infoSources['0']['name2'], 'branch_evt'=>I('get.branch_evt')]);?>" <?php if(urlencode($infoSources[0]['name2']) == urlencode(I('get.branch_dict'))){echo 'selected';}?>><?php echo ($infoSources["0"]["name2"]); ?></option>
+                        <option value="<?php echo U('', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_dict'=>$infoSources['0']['name3'], 'branch_evt'=>I('get.branch_evt')]);?>" <?php if(urlencode($infoSources[0]['name3']) == urlencode(I('get.branch_dict'))){echo 'selected';}?>><?php echo ($infoSources["0"]["name3"]); ?></option>
+                        <option value="<?php echo U('', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_dict'=>$infoSources['0']['name4'], 'branch_evt'=>I('get.branch_evt')]);?>" <?php if(urlencode($infoSources[0]['name4']) == urlencode(I('get.branch_dict'))){echo 'selected';}?>><?php echo ($infoSources["0"]["name4"]); ?></option>
+                    <!--     <?php if(empty($iid)): ?><option value="">- 请选择信息来源 -</option><?php endif; ?>
+                        <?php if(!empty($iid)): ?><option value="<?php echo ($iid); ?>"><?php echo ($iid); ?></option><?php endif; ?>
+                        <?php if(empty($iid)): if(is_array($liste)): $i = 0; $__LIST__ = $liste;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option><?php echo ($vo["s_laiyuan"]); ?></option><?php endforeach; endif; else: echo "" ;endif; endif; ?>
+
+                        <?php if(!empty($iid)): if(is_array($listec)): $i = 0; $__LIST__ = $listec;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option><?php echo ($vo["s_laiyuan"]); ?></option><?php endforeach; endif; else: echo "" ;endif; endif; ?> -->
+
+                    </select>
+                    <a href="?m=Admin&c=Index&a=cdbmain&id=<?php echo (session('userid')); ?>&xqid=<?php echo (session('xiaoquid')); ?>" class="btn btn-info">还原</a>
+                </form>
+                <script>
+                function searchDict(obj){
+                    window.location.href = $(obj).val();
+                }
+                </script>
+                <form class="form-inline inline1" action="?m=Index&a=xmdh" method="post" >
+                    <?php if(empty($xmdh)): ?><input type="text" name="xmdh" placeholder="请输入手机号码或姓名"/><?php endif; ?>
+                    <?php if(!empty($xmdh)): ?><input type="text" value="<?php echo ($xmdh); ?>" /><?php endif; ?>
+                    <input class="btn btn-info" type="submit" value="查询" />
+                    <?php if(!empty($xmdh)): ?><a href="?m=Admin&c=Index&a=cdbmain&id=<?php echo (session('userid')); ?>&xqid=<?php echo (session('xiaoquid')); ?>"class="btn btn-info">还原</a><?php endif; ?>
+                </form>
+                <form class="form-inline inline1" style="margin-left:15px;" action="?m=Index&a=fenpei" method="post">
+                <input type="hidden" name="uid" value="<?php echo (session('userid')); ?>">
+                <?php if(in_array('分配权限',$gn)): ?><select class="form-control" name="guwen">
+                        <option value="跳过">-请选择课程顾问-</option>
+                        <?php if(is_array($listq)): $i = 0; $__LIST__ = $listq;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$go): $mod = ($i % 2 );++$i; if(strpos($go['r_id'],'5')!==false){ ?>
+                            <option value="<?php echo ($go["u_id"]); ?>"><?php echo ($go["u_users"]); ?></option>
+                            <?php  } endforeach; endif; else: echo "" ;endif; ?>
+                    </select>
+                    <input class="btn btn-info" type="submit" value="批量分配" onclick="jlls()"/><?php endif; ?>
+            </td>
+        </tr>
+    </table>
+    <script>
+    function jlls() {  
+        if(window.confirm('确实要分配吗？')){
+            //alert("确定");
+            //window.location.href='?m=Index&a=fenpei';
+            return true;
+        }else{
+            //alert("取消");
+            return false;
+        }
+    }//del end
+    </script>
+    <table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
+        <thead>
+            <tr>
+                <th>相关活动</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>联系人姓名</th>
+                <th>手机号码</th>
+                <th>采单员</th>
+                <th>采单日期</th>
+                <th>采单地点</th>
+                <th>信息来源</th>
+                <th>客户等级</th>
+            </tr>
+        </thead>
+        <?php if($results): if(is_array($results)): foreach($results as $key=>$val): ?><tr>
+                    <td>
+                        <input name="id[]" type="checkbox" value="<?php echo ($val["id"]); ?>">
+                        <?php echo (findStudentInfo('student_marketing',$val["id"], 'branch_dict')); ?>
+                    </td>
+                    <td class="text-center"><?php echo ($val["name"]); ?></td>
+                    <td class="text-center"><?php echo ($val["sex_text"]); ?></td>
+                    <td class="text-center"><?php echo (findStudentInfo('student_family', $val["id"], 'contact')); ?></td>
+                    <td class="text-center"><?php echo (findStudentInfo('student_family', $val["id"], 'contact_phone')); ?></td>
+                    <td class="text-center"><?php echo (findMember(findStudentInfo('student_operation', $val["id"], 'create_user'), 'name')); ?></td>
+                    <td class="text-center"><?php echo (findStudentInfo('student_marketing', $val["id"], 'collection_date')); ?></td>
+                    <td class="text-center"><?php echo (findStudentInfo('student_marketing', $val["id"], 'collection_location')); ?></td>
+                    <td class="text-center"><?php echo (findStudentInfo('student_marketing', $val["id"], 'branch_dict')); ?></td>
+                    <td class="text-center"><?php echo ($val["level"]); ?></td>
+                </tr><?php endforeach; endif; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="99" class="text-center">暂无任何数据</td>
+            </tr><?php endif; ?>
+    </table>
+</form>
+    
             </div>
         </div>
         <!-- <iframe id="frmTitle" name="left" height="100%" class="said fl" src="<?php echo U('/Index/side');?>" style=" display:block;"> </iframe> -->

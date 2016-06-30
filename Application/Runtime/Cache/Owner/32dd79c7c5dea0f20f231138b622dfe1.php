@@ -299,13 +299,13 @@
     </thead>
     <?php if($results): if(is_array($results)): foreach($results as $key=>$val): ?><tr>
                 <td><?php echo ($val["title"]); ?></td>
-                <td></td>
+                <td><?php echo ($val["id"]); ?></td>
                 <td><?php echo ($val["time_begin"]); ?></td>
                 <td><?php echo ($val["time_end"]); ?></td>
                 <td><?php echo (findMember($val["user"], 'name')); ?></td>
                 <td><?php echo ($val["status_text"]); ?></td>
                 <td width="260" class="text-center">
-                    <a href="#" class="btn btn-sm btn-success" >导入客户</a>
+                    <a href="<?php echo U('/marketing/import', array('table'=>'student', 'bid'=>I('get.bid'), 'evt_id'=>$val['id']));?>" class="btn btn-sm btn-success" >导入客户</a>
                     <a href="<?php echo U('/marketing/update', array('table'=>'event', 'bid'=>I('get.bid'), 'id'=>$val['id']));?>" class="btn btn-sm btn-warning" >更新</a>
                     <a href="<?php echo U('/marketing/eventDel', array('table'=>'event', 'bid'=>I('get.bid') ,'id'=>$val['id']));?>" class="btn btn-sm btn-danger" onclick="if(confirm('确定要删除这次活动吗？')==false)return false;" >删除</a>
                 </td>

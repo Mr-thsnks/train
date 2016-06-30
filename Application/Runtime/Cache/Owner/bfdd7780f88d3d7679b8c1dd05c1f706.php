@@ -309,6 +309,7 @@
                 <label for="name">活动类型:</label>
                 <select class="form-control" name="type" data-validation-engine="validate[required]">
                     <option style="color:blue;"><?php echo ($event["type"]); ?></option>
+
                     <?php if(is_array($eventType)): $i = 0; $__LIST__ = $eventType;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$so): $mod = ($i % 2 );++$i;?><option value="<?php echo ($so["name1"]); ?>"><?php echo ($so["name1"]); ?></option>
                         <option value="<?php echo ($so["name2"]); ?>"><?php echo ($so["name2"]); ?></option>
                         <option value="<?php echo ($so["name3"]); ?>"><?php echo ($so["name3"]); ?></option>

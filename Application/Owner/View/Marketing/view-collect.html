@@ -1,63 +1,52 @@
-<form class="form-inline inline1" action="__APP__?m=Index&a=cdxc" method="post">
+
     <h2 class="lmbt">客户信息</h2>
     <table class="center-block" style="width:97.5%; margin-bottom:10px;">
         <tr>
-            <td> 
-                <input type="hidden" name="xqid" value="{$Think.session.xiaoquid}">
+            <td>
+                <form class="form-inline col-md-4" action="{:U('__SELFURL__', I('get.'))}" method="get">
                     <label for="name">活动/来源查询：</label>
-                    <select class="form-control" name="huodongcx">
-                        <empty name="dhid">
-                            <option value="">- 请选择活动 -</option>
-                        </empty>
-                        <notempty name="dhid">
-                            <option value="{$dhid}">{$dhid}</option>
-                        </notempty>
-                        <empty name="dhid">
-                            <volist name="listte" id="vo">
-                                <option>{$vo.s_xiangguanhuodong}</option>
-                            </volist>
-                        </empty>
-                        <notempty name="dhid">
-                            <volist name="listtec" id="vo">
-                                <option>{$vo.s_xiangguanhuodong}</option>
-                            </volist>
+                    <select class="form-control" onchange="searchDict(this)">
+                        <notempty name="eventTitle">
+                            <option value="{:U('__SELFURL__', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_dict'=>I('get.branch_dict')])}">请选择活动</option>
+                            <foreach name="eventTitle" item="val">
+                                <if condition="I('get.branch_evt') EQ $val['id']">
+                                    <option value="{:U('__SELFURL__', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_evt'=>$val['id'], 'branch_dict'=>I('get.branch_dict')])}" selected>{$val.title}</option>
+                                <else />
+                                    <option value="{:U('__SELFURL__', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_evt'=>$val['id'], 'branch_dict'=>I('get.branch_dict')])}">{$val.title}</option>
+                                </if>
+                            </foreach>
                         </notempty>
                     </select>
 
-                    <select class="form-control" name="laiyuancx">
-                        <empty name="iid">
-                            <option value="">- 请选择信息来源 -</option>
-                        </empty>
-                        <notempty name="iid">
-                            <option value="{$iid}">{$iid}</option>
-                        </notempty>
-                        <empty name="iid">
-                            <volist name="liste" id="vo">
-                                <option>{$vo.s_laiyuan}</option>
-                            </volist>
-                        </empty>
-
-                        <notempty name="iid">
-                            <volist name="listec" id="vo">
-                                <option>{$vo.s_laiyuan}</option>
-                            </volist>
-                        </notempty>
-
+                    <eq name="Think.get.branch_dict" value="infoSources.0.name4">selected</eq>
+                    <select class="form-control" style="margin-left:20px" onchange="searchDict(this)">
+                        <option value="{:U('__SELFURL__', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_evt'=>I('get.branch_evt')])}">请选择来源</option>
+                        <option value="{:U('__SELFURL__', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_dict'=>$infoSources['0']['name1'], 'branch_evt'=>I('get.branch_evt')])}" <?php if(urlencode($infoSources[0]['name1']) == urlencode(I('get.branch_dict'))){echo 'selected';}?>>{$infoSources.0.name1}</option>
+                        <option value="{:U('__SELFURL__', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_dict'=>$infoSources['0']['name2'], 'branch_evt'=>I('get.branch_evt')])}" <?php if(urlencode($infoSources[0]['name2']) == urlencode(I('get.branch_dict'))){echo 'selected';}?>>{$infoSources.0.name2}</option>
+                        <option value="{:U('__SELFURL__', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_dict'=>$infoSources['0']['name3'], 'branch_evt'=>I('get.branch_evt')])}" <?php if(urlencode($infoSources[0]['name3']) == urlencode(I('get.branch_dict'))){echo 'selected';}?>>{$infoSources.0.name3}</option>
+                        <option value="{:U('__SELFURL__', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_dict'=>$infoSources['0']['name4'], 'branch_evt'=>I('get.branch_evt')])}" <?php if(urlencode($infoSources[0]['name4']) == urlencode(I('get.branch_dict'))){echo 'selected';}?>>{$infoSources.0.name4}</option>
                     </select>
-                    <input class="btn btn-info" type="submit" value="查询" />
-                    <a href="?m=Admin&c=Index&a=cdbmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" class="btn btn-info">还原</a>
+                    <a class="btn btn-info" href="{:U('/marketing/view', ['table'=>I('get.table'), 'bid'=>I('get.bid')])}" >还原</a>
                 </form>
-                <form class="form-inline inline1" action="__APP__?m=Index&a=xmdh" method="post">
-                    <empty name="xmdh">
-                        <input type="text" name="xmdh" placeholder="请输入手机号码或姓名"/>
-                    </empty>
-                    <notempty name="xmdh">
-                        <input type="text" value="{$xmdh}" />
-                    </notempty>
+                <script>
+                function searchDict(obj){
+                    window.location.href = $(obj).val();
+                }
+                </script>
+                <form class="form-inline col-md-4" action="{:U('__SELFURL__')}" method="get" >
+                    <input type="text" name="namePhone" class="form-control" placeholder="请输入手机号码或姓名"/>
                     <input class="btn btn-info" type="submit" value="查询" />
-                    <notempty name="xmdh">
-                    <a href="?m=Admin&c=Index&a=cdbmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}"class="btn btn-info">还原</a>
-                    </notempty>
+                    <?php
+                    $get = I('get.');
+                    //$get = array_unique($get);
+                    unset($get['namePhone']);
+                    foreach($get as $key => $val){
+                    ?>
+                    <input type="hidden" name="{$key}" value="{$val}">
+                    <?php
+                    }
+                    ?>
+                    <a class="btn btn-info" href="{:U('/marketing/view', ['table'=>I('get.table'), 'bid'=>I('get.bid')])}" >还原</a>
                 </form>
                 <form class="form-inline inline1" style="margin-left:15px;" action="__APP__?m=Index&a=fenpei" method="post">
                 <input type="hidden" name="uid" value="{$Think.session.userid}">
@@ -126,5 +115,8 @@
             </tr>
         </if>
     </table>
+    <div class="pagination">
+    {$page}
+</div>
 </form>
     

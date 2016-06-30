@@ -69,17 +69,57 @@ class MarketingController extends BaseController
     {
         $map['branch_id'] = I('get.bid');
         if ($table == 'event') {
-            $results = $this->Event->join('LEFT JOIN t_event_actual ON t_event.id = t_event_actual.event_id')->where($map)->field('t_event.id, t_event.title, t_event_actual.quantity_actual, t_event.time_begin, t_event.time_end, t_event.user, t_event.status')->order('t_event.id desc')->select();
+            //分页
+            $count = $this->Event->join('LEFT JOIN t_event_actual ON t_event.id = t_event_actual.event_id')->where($map)->count();
+            $Page = new \Think\Page($count , 2);
+            $show = $Page->show();
+
+            $results = $this->Event->join('LEFT JOIN t_event_actual ON t_event.id = t_event_actual.event_id')->where($map)->limit($Page->firstRow.','.$Page->listRows)->field('t_event.id, t_event.title, t_event_actual.quantity_actual, t_event.time_begin, t_event.time_end, t_event.user, t_event.status')->order('t_event.id desc')->select();
             int2string($results, [
                 'status' => ['0' => '取消', '1' => '进行中', '2' => '已结束'],
             ]);
         }else{
-            $results = $this->Student->order('id desc')->select();
+            $marketingMap = [];
+            if (I('get.branch_evt') != '' || I('get.branch_dict') != '') {
+                $ids = [];
+                
+                if(I('get.branch_evt')){
+                    $marketingMap['branch_event'] = I('get.branch_evt');
+                }
+
+                if(I('get.branch_dict')){
+                    $marketingMap['branch_dict'] = I('get.branch_dict');
+                }
+                
+                
+                
+                $idsTmp = $this->studentMarketing->where($marketingMap)->field('student_id')->select(false);
+
+                foreach ($idsTmp as $val) {
+                    $ids[] = $val['student_id'];
+                }
+                $map['id'] = array('in', implode(',', $ids));
+            }
+            $namePhone = I('get.namePhone');
+            if($namePhone){
+                $map['name|phone'] = $namePhone;
+            }
+            //分页
+            $count = $this->Student->where($map)->count();
+            $Page = new \Think\Page($count,2);
+            $show = $Page->show();
+            $results = $this->Student->where($map)->limit($Page->firstRow.','.$Page->listRows)->order('id desc')->select();
             int2string($results, [
                 'sex' => ['0' => '女', '1' => '男'],
             ]);
+            $this->assign('page',$show);
         }
+        $this->assign('page',$show);
         $this->assign('results', $results);
+        $eventTitle = $this->Event->field('id, title')->select();
+        $this->assign('eventTitle' , $eventTitle);
+        
+
         $this->display('view-' . $table);
     }
 
