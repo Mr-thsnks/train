@@ -168,7 +168,7 @@
                     <table class="table table-bordered">
                         <tr>
                             <td width="100" class="text-right">信息来源：</td>
-                            <td colspan="1">
+                            <td width="200">
                                 <select class="form-control" name="branch_dict">
                                     <foreach name="infoSources" item="vo">
                                         <option value="{$vo.name1}">{$vo.name1}</option>
@@ -178,12 +178,10 @@
                                     </foreach>
                                 </select>
                             </td>
-                            <td width="100" class="text-right">相关活动：</td>
-                            <td><input type="text" class="form-control" name="branch_event" value="{$hdname}"></td>
                             <td width="100" class="text-right">采单日期：</td>
-                            <td colspan="1"><input class="form-control Wdate" type="text" name="collection_date" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly></td>
+                            <td width="200"><input class="form-control Wdate" type="text" name="collection_date" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly></td>
                             <td width="100" class="text-right">采单地址：</td>
-                            <td><input type="text" class="form-control" name="collection_location"></td>
+                            <td colspan="2"><input type="text" class="form-control" name="collection_location"></td>
                         </tr>
                     </table>
                 </div>
