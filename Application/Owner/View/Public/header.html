@@ -1,18 +1,38 @@
 <div class="headdx">
     <ul>
-        <li class="btn btn-primary" role="button">
+        <if condition="I('get.bid')">
+            <li class="btn btn-primary" role="button">
+        <else />
+            <li class="btn btn-primary disabled" role="button">
+        </if>
             <a href="{:U('/marketing/view', array('table'=>'event', 'bid'=>I('get.bid')))}">市场<span class="glyphicon glyphicon-education" aria-hidden="true"></span></a>
         </li>
-        <li class="btn btn-success" role="button">
+        <if condition="I('get.bid')">
+            <li class="btn btn-success" role="button">
+        <else />
+            <li class="btn btn-success disabled" role="button">
+        </if>
             <a href="#">销售<span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
         </li>
-        <li class="btn btn-info" role="button">
+        <if condition="I('get.bid')">
+            <li class="btn btn-info" role="button">
+        <else />
+            <li class="btn btn-info disabled" role="button">
+        </if>
             <a href="#">教学教务<span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span></a>
         </li>
-        <li class="btn btn-warning" role="button">
+        <if condition="I('get.bid')">
+            <li class="btn btn-warning" role="button">
+        <else />
+            <li class="btn btn-warning disabled" role="button">
+        </if>
             <a href="#">人事<span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span></a>
         </li>
-        <li class="btn btn-danger" role="button">
+        <if condition="I('get.bid')">
+            <li class="btn btn-danger" role="button">
+        <else />
+            <li class="btn btn-danger disabled" role="button">
+        </if>
             <a href="#">统计<span class="glyphicon glyphicon-stats" aria-hidden="true"></span></a>
         </li>
         <li class="btn btn-default disabled" role="button">
