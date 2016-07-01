@@ -1,0 +1,53 @@
+<div class="ula">
+    <ul>
+        <li><a href="{:U('Index/bwlmain')}">备忘录</a>
+        </li>
+        <li class="bg"><a href="{:U('Index/index')}" target="main">系统通知</a><span class="badge">4</span>
+        </li>
+    </ul>
+</div>
+<div class="ulb">
+    <h3 class="none">销售管理</h3>
+    <ul class="listUl">
+          <!--  <if condition="in_array('快速记录',$gn)">
+                <li class="w">
+                    <a href="{:U('Index/ksjlmain')}" target="main">快速记录</a>
+                </li>
+            </if> -->
+        <li>
+            <h3><a target="main">客户</a></h3>
+            <ul>
+                <li>
+                    <a href="{:U('/sale/view', array('table'=>'customer', 'bid'=>I('get.bid')))}" target="main">我的客户</a>
+                </li>
+                <li>
+                    <a href="{:U('/sale/view', array('table'=>'', 'bid'=>I('get.bid')))}" target="main">定金客户</a>
+                </li>
+                <li>
+                    <a href="?m=Admin&c=Xiaoshou&a=qkkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">全款客户</a>
+                </li>
+                <li>
+                    <a href="?m=Admin&c=Xiaoshou&a=thkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">退回客户</a>
+                </li>
+                <li>
+                    <a href="?m=Admin&c=Xiaoshou&a=sxkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">失效客户</a>
+                </li>
+                <li>
+                    <a href="?m=Admin&c=Xiaoshou&a=sdkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">死单客户</a>
+                </li>
+                <li>
+                    <a href="?m=Admin&c=Xiaoshou&a=tfkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">退费客户</a>
+                </li>
+                <li>
+                    <a href="?m=Admin&c=Xiaoshou&a=dqkhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">到期客户</a>
+                </li>
+            </ul>
+        </li>
+        <li class="w">
+            <a href="?m=Admin&c=Xiaoshou&a=skmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">试课</a>
+        </li>
+        <li class="w">
+            <a href="?m=Admin&c=Xiaoshou&a=xkmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" target="main">续课</a>
+        </li>
+    </ul>
+</div> 
