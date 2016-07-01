@@ -47,12 +47,12 @@ class MarketingController extends BaseController
                 case '活动类型':
                     $dict[2][] = $val;
                     break;
-                
+
                 default:
                     # code...
                     break;
             }
-            
+
         }
         $this->assign('clientLevel', $dict[0]);
         $this->assign('infoSources', $dict[1]);
@@ -71,26 +71,26 @@ class MarketingController extends BaseController
         if ($table == 'event') {
             //分页
             $count = $this->Event->join('LEFT JOIN t_event_actual ON t_event.id = t_event_actual.event_id')->where($map)->count();
-            $Page = new \Think\Page($count , 2);
+            $Page = new \Think\Page($count, 25);
             $show = $Page->show();
 
-            $results = $this->Event->join('LEFT JOIN t_event_actual ON t_event.id = t_event_actual.event_id')->where($map)->limit($Page->firstRow.','.$Page->listRows)->field('t_event.id, t_event.title, t_event_actual.quantity_actual, t_event.time_begin, t_event.time_end, t_event.user, t_event.status')->order('t_event.id desc')->select();
+            $results = $this->Event->join('LEFT JOIN t_event_actual ON t_event.id = t_event_actual.event_id')->where($map)->limit($Page->firstRow . ',' . $Page->listRows)->field('t_event.id, t_event.title, t_event_actual.quantity_actual, t_event.time_begin, t_event.time_end, t_event.user, t_event.status')->order('t_event.id desc')->select();
             int2string($results, [
                 'status' => ['0' => '取消', '1' => '进行中', '2' => '已结束'],
             ]);
-        }else{
+        } else {
             $marketingMap = [];
             if (I('get.branch_evt') != '' || I('get.branch_dict') != '') {
                 $ids = [];
-                
-                if(I('get.branch_evt')){
+
+                if (I('get.branch_evt')) {
                     $marketingMap['branch_event'] = I('get.branch_evt');
                 }
 
-                if(I('get.branch_dict')){
+                if (I('get.branch_dict')) {
                     $marketingMap['branch_dict'] = I('get.branch_dict');
                 }
-                
+
                 $idsTmp = $this->studentMarketing->where($marketingMap)->field('student_id')->select();
 
                 foreach ($idsTmp as $val) {
@@ -99,22 +99,22 @@ class MarketingController extends BaseController
                 $map['id'] = array('in', implode(',', $ids));
             }
             $namePhone = I('get.namePhone');
-            if($namePhone){
+            if ($namePhone) {
                 $map['name|phone'] = $namePhone;
             }
             //分页
             $count = $this->Student->where($map)->count();
-            $Page = new \Think\Page($count,2);
+            $Page = new \Think\Page($count, 25);
             $show = $Page->show();
-            $results = $this->Student->where($map)->limit($Page->firstRow.','.$Page->listRows)->order('id desc')->select();
+            $results = $this->Student->where($map)->limit($Page->firstRow . ',' . $Page->listRows)->order('id desc')->select();
             int2string($results, [
                 'sex' => ['0' => '女', '1' => '男'],
             ]);
         }
 
         $eventTitle = $this->Event->field('id, title')->select();
-        $this->assign('eventTitle' , $eventTitle);
-        $this->assign('page',$show);
+        $this->assign('eventTitle', $eventTitle);
+        $this->assign('page', $show);
         $this->assign('results', $results);
         $this->display('view-' . $table);
     }
@@ -230,10 +230,11 @@ class MarketingController extends BaseController
                 ['phone', 'require', '联系方式必填'],
                 ['intention', 'require', '意向科目必填'],
             ];
-            if(!$studentData = $this->Student->validate($studentRules)->create()){
+            if (!$studentData = $this->Student->validate($studentRules)->create()) {
                 $this->alert($this->Student->getError());
                 return false;
             }
+            $studentData['branch_id'] = I('get.bid');
             $familyData = $this->studentFamily->create();
             $marketingData = $this->studentMarketing->create();
             $salesData = $this->studentSales->create();
@@ -253,5 +254,21 @@ class MarketingController extends BaseController
         }
 
         $this->display('import-' . $table);
+    }
+
+    public function move(string $table, int $bid)
+    {
+        if(IS_POST){
+            if(I('post.move') == 0){
+                $this->alert('请选择顾问');
+                return false;
+            }
+            $ids = implode(',', I('post.id'));
+            $updateData['adviser'] = I('post.move');
+            $map['student_id'] = ['in', $ids];
+            $status = $this->studentSales->where($map)->save($updateData);
+            chkStatus($status, '匹配成功', '匹配失败', '/marketing/view.html?table=collect&bid=' . $bid);
+        }
+        $this->display('move-' . $table);
     }
 }

@@ -12,14 +12,14 @@
         <else />
             <li class="btn btn-success disabled" role="button">
         </if>
-            <a href="#">销售<span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+            <a href="{:U('/sale/view', array('table'=>'customer', 'bid'=>I('get.bid')))}">销售<span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
         </li>
         <if condition="I('get.bid')">
             <li class="btn btn-info" role="button">
         <else />
             <li class="btn btn-info disabled" role="button">
         </if>
-            <a href="#">教学教务<span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span></a>
+            <a href="{:U('/teaching/view', ['table'=>'student', 'bid'=>I('get.bid')])}">教学教务<span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span></a>
         </li>
         <if condition="I('get.bid')">
             <li class="btn btn-warning" role="button">

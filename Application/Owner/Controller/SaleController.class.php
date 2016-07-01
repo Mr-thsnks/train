@@ -21,12 +21,28 @@ class SaleController extends BaseController
 
     public function index()
     {
-        $this->redirect('sale/');
+        $this->redirect('/sale/view');
     }
 
     public function view(string $table)
     {
-        $this->update();
+        $map['branch_id'] = I('get.bid');
+        if($table == 'customer'){
+            $results = $this->Student->where($map)->field('')->select();
+            int2string($results, [
+                'sex' => ['0' => '女', '1' => '男'],
+            ]);
+            //dump($results);die;
+
+        }
+
+        $this->assign('results' , $results);
+        $this->display('view-' . $table);
+    }
+
+    public function add(string $table , int $bid){
+
+        $this->display('view' . $table);
     }
 
     public function update(string $table)

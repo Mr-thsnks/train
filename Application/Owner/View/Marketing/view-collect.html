@@ -3,7 +3,8 @@
     <table class="center-block" style="width:97.5%; margin-bottom:10px;">
         <tr>
             <td>
-                <form class="form-inline col-md-4" action="{:U('__SELFURL__', I('get.'))}" method="get">
+                <div class="col-md-12">
+                    <form class="form-inline col-md-4" action="{:U('__SELFURL__', I('get.'))}" method="get">
                     <label for="name">活动/来源查询：</label>
                     <select class="form-control" onchange="searchDict(this)">
                         <notempty name="eventTitle">
@@ -48,34 +49,37 @@
                     ?>
                     <a class="btn btn-info" href="{:U('/marketing/view', ['table'=>I('get.table'), 'bid'=>I('get.bid')])}" >还原</a>
                 </form>
-                <form class="form-inline inline1" style="margin-left:15px;" action="__APP__?m=Index&a=fenpei" method="post">
-                <input type="hidden" name="uid" value="{$Think.session.userid}">
-                <if condition="in_array('分配权限',$gn)">
-                    <select class="form-control" name="guwen">
-                        <option value="跳过">-请选择课程顾问-</option>
-                        <volist name="listq" id="go">
-                            <?php if(strpos($go['r_id'],'5')!==false){  ?>
-                            <option value="{$go.u_id}">{$go.u_users}</option>
-                            <?php   }?>
-                        </volist>
-                    </select>
-                    <input class="btn btn-info" type="submit" value="批量分配" onclick="jlls()"/>
-                </if>
+                </div>
+                <p style="height: 20px; float: left">&nbsp;</p>
+                <div class="col-md-12">
+                    <form action="{:U('/marketing/move', I('get.'))}" method="post" id="move" class="form-inline col-md-12">
+                        <php>
+                            $map['title'] = array(array('eq', '课程主管'), array('eq','课程顾问'), 'or') ;;
+                            $authGroupAcc = M('auth_group_access');
+                            $rules = $authGroupAcc->alias('access')->join('LEFT JOIN t_auth_group ON t_auth_group.id = access.group_id')->where($map)->select();
+                            $ids = [];
+                            foreach($rules as $val){
+                                $ids[] = $val['uid'];
+                            }
+                            unset($map);
+                            $map['branch_id'] = I('get.bid');
+                            $map['id'] = ['in', implode(',', $ids)];
+                            $Member = M('Member');
+                            $adviser = $Member->where($map)->select();
+                        </php>
+                        <select name="move" class="form-control">
+                            <option value="0">请选择顾问</option>
+                            <foreach name="adviser" item="val">
+                                <option value="{$val.id}">{$val.name}</option>
+                            </foreach>
+                        </select>
+                        <button class="btn btn-sm btn-info">分配</button>
+                    </form>
+                </div>
             </td>
         </tr>
     </table>
-    <script>
-    function jlls() {  
-        if(window.confirm('确实要分配吗？')){
-            //alert("确定");
-            //window.location.href='__APP__?m=Index&a=fenpei';
-            return true;
-        }else{
-            //alert("取消");
-            return false;
-        }
-    }//del end
-    </script>
+
     <table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
         <thead>
             <tr>
@@ -83,11 +87,12 @@
                 <th>手机号码</th>
                 <th>姓名</th>
                 <th>性别</th>
-                <th>联系人姓名</th>
-                <th>联系人手机号码</th>
+                <!-- <th>联系人姓名</th> -->
+                <!-- <th>联系人手机号码</th> -->
+                <th>顾问</th>
                 <th>采单员</th>
-                <th>采单日期</th>
                 <th>采单地点</th>
+                <th>采单日期</th>
                 <th>信息来源</th>
                 <th>客户等级</th>
             </tr>
@@ -96,17 +101,18 @@
             <foreach name="results" item="val">
                 <tr>
                     <td>
-                        <input name="id[]" type="checkbox" value="{$val.id}">
+                        <input name="id[]" type="checkbox" value="{$val.id}" form="move">
                         {$val.id|findStudentInfo='student_marketing',###, 'branch_dict'}
                     </td>
                     <td class="text-center">{$val.phone}</td>
                     <td class="text-center">{$val.name}</td>
                     <td class="text-center">{$val.sex_text}</td>
-                    <td class="text-center">{$val.id|findStudentInfo='student_family', ###, 'contact'}</td>
-                    <td class="text-center">{$val.id|findStudentInfo='student_family', ###, 'contact_phone'}</td>
+                    <td class="text-center">{$val.id|findStudentInfo='student_sales', ###, 'adviser'|findMember=###,'name'}</td>
+                    <!-- <td class="text-center">{$val.id|findStudentInfo='student_family', ###, 'contact'}</td> -->
+                    <!-- <td class="text-center">{$val.id|findStudentInfo='student_family', ###, 'contact_phone'}</td> -->
                     <td class="text-center">{$val.id|findStudentInfo='student_operation', ###, 'create_user'|findMember=###, 'name'}</td>
-                    <td class="text-center">{$val.id|findStudentInfo='student_marketing', ###, 'collection_date'}</td>
                     <td class="text-center">{$val.id|findStudentInfo='student_marketing', ###, 'collection_location'}</td>
+                    <td class="text-center">{$val.id|findStudentInfo='student_marketing', ###, 'collection_date'}</td>
                     <td class="text-center">{$val.id|findStudentInfo='student_marketing', ###, 'branch_dict'}</td>
                     <td class="text-center">{$val.level}</td>
                 </tr>

@@ -8,7 +8,7 @@
             <input type="text" name="jiaoshi" placeholder="请输入手机号码/姓名"/>
                 <input class="btn btn-info" type="submit" value="查询"/>
                 <notempty name="jiaoshi">
-                <a href="?m=Admin&c=login&a=qxzhmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" class="btn btn-info">还原</a>
+                <a href="#" class="btn btn-info">还原</a>
                 </notempty>
             </form>
         </td>
@@ -18,7 +18,7 @@
             <div class="modal fade" id="create-user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <form action="{:U('__SELFURL__')}" method="post" class="validatable">
+                        <form action="{:U('__SELFURL__', ['table'=>I('get.table')])}" method="post" class="validatable">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title" id="myModalLabel">新增角色信息</h4>
