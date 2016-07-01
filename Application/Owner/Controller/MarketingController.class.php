@@ -91,9 +91,7 @@ class MarketingController extends BaseController
                     $marketingMap['branch_dict'] = I('get.branch_dict');
                 }
                 
-                
-                
-                $idsTmp = $this->studentMarketing->where($marketingMap)->field('student_id')->select(false);
+                $idsTmp = $this->studentMarketing->where($marketingMap)->field('student_id')->select();
 
                 foreach ($idsTmp as $val) {
                     $ids[] = $val['student_id'];
@@ -112,14 +110,12 @@ class MarketingController extends BaseController
             int2string($results, [
                 'sex' => ['0' => '女', '1' => '男'],
             ]);
-            $this->assign('page',$show);
         }
-        $this->assign('page',$show);
-        $this->assign('results', $results);
+
         $eventTitle = $this->Event->field('id, title')->select();
         $this->assign('eventTitle' , $eventTitle);
-        
-
+        $this->assign('page',$show);
+        $this->assign('results', $results);
         $this->display('view-' . $table);
     }
 

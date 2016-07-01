@@ -26,7 +26,7 @@
                         <option value="{:U('__SELFURL__', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_dict'=>$infoSources['0']['name3'], 'branch_evt'=>I('get.branch_evt')])}" <?php if(urlencode($infoSources[0]['name3']) == urlencode(I('get.branch_dict'))){echo 'selected';}?>>{$infoSources.0.name3}</option>
                         <option value="{:U('__SELFURL__', ['table'=>I('get.table'), 'bid'=>I('get.bid'), 'branch_dict'=>$infoSources['0']['name4'], 'branch_evt'=>I('get.branch_evt')])}" <?php if(urlencode($infoSources[0]['name4']) == urlencode(I('get.branch_dict'))){echo 'selected';}?>>{$infoSources.0.name4}</option>
                     </select>
-                    <a class="btn btn-info" href="{:U('/marketing/view', ['table'=>I('get.table'), 'bid'=>I('get.bid')])}" >还原</a>
+                    <!-- <a class="btn btn-info" href="{:U('/marketing/view', ['table'=>I('get.table'), 'bid'=>I('get.bid')])}" >还原</a> -->
                 </form>
                 <script>
                 function searchDict(obj){
@@ -80,10 +80,11 @@
         <thead>
             <tr>
                 <th>相关活动</th>
+                <th>手机号码</th>
                 <th>姓名</th>
                 <th>性别</th>
                 <th>联系人姓名</th>
-                <th>手机号码</th>
+                <th>联系人手机号码</th>
                 <th>采单员</th>
                 <th>采单日期</th>
                 <th>采单地点</th>
@@ -98,6 +99,7 @@
                         <input name="id[]" type="checkbox" value="{$val.id}">
                         {$val.id|findStudentInfo='student_marketing',###, 'branch_dict'}
                     </td>
+                    <td class="text-center">{$val.phone}</td>
                     <td class="text-center">{$val.name}</td>
                     <td class="text-center">{$val.sex_text}</td>
                     <td class="text-center">{$val.id|findStudentInfo='student_family', ###, 'contact'}</td>
