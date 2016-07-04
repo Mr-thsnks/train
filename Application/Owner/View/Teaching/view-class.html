@@ -1,1 +1,103 @@
-view-class.html
+<h2 class="lmbt">班级信息</h2>
+<table class="center-block" style="width:97.5%; margin-bottom:10px;">
+    <tr>
+        <td>
+            <form class="form-inline">
+                <select class="form-control" onChange="fun1(this)">
+                    <empty name="zhujid">
+                        <option value="请选择主教">- 请选择主教 -</option>
+                    </empty>
+                    <notempty name="zhujid">
+                        <option value="{$zhujid}">{$zhujid}</option>
+                    </notempty>
+
+                    <volist name="qqq" id="vo">
+                        <option value="{$vo.c_zhujiao}">{$vo.c_zhujiao}</option>
+                    </volist>
+                </select>
+
+                <select class="form-control" onChange="fun2(this)">
+                    <empty name="tutor">
+                        <option value="请选择助教">- 请选择助教 -</option>
+                    </empty>
+                    <notempty name="tutor">
+                        <option value="{$tutor}">{$tutor}</option>
+                    </notempty>
+                    <volist name="qqq" id="vo">
+                        <option value="{$vo.c_tutor}">{$vo.c_tutor}</option>
+                    </volist>
+                </select>
+                <select class="form-control" onChange="fun4(this)">
+                    <empty name="kemu">
+                        <option value="请选择科目">- 请选择科目 -</option>
+                    </empty>
+                    <notempty name="kemu">
+                        <option value="{$kemu}">{$kemu}</option>
+                    </notempty>
+                    <volist name="qqq" id="vo">
+                        <option value="{$vo.c_kemu}">{$vo.c_kemu}</option>
+                    </volist>
+                </select>
+                <a href="?m=Admin&c=Jiaoxue&a=jsbjmain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" class="btn btn-success">还原</a>
+            </form>
+        </td>
+        <td width="80px">
+            <a href="{:U('/teaching/add', ['table'=>'class', 'bid'=>I('get.bid')])}" class="btn btn-success">新增</a> 
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
+    <thead>
+        <tr>
+            <th>班级名称</th>
+            <th>科目</th>
+            <th>教室</th>
+            <th>状态</th>
+            <th>主教</th>
+            <th>助教</th>
+            <th>当前人数</th>
+            <th>限招人数</th>
+            <th>年龄范围</th>
+            <th>背景色</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <volist name="class" id="vo">
+        <tr>
+            <td class="text-center">{$vo.class_title}</td>
+            <td class="text-center">{$vo.class_subject}</td>
+            <td class="text-center">{$vo.class_room}</td>
+            <td class="text-center">{$vo.class_status_text}</td>
+            <td class="text-center">{$vo.class_main_teacher|findMember=###, 'name'}</td>
+            <td class="text-center">{$vo.class_vice_teacher|findMember=###, 'name'}</td>
+            <td class="text-center">{$vo.class_current}</td>
+            <td class="text-center">{$vo.class_limit}</td>
+            <td class="text-center">{$vo.class_between_age}</td>
+            <td class="text-center">{$vo.class_background}</td>
+            <td class="text-center" width="160px">
+                <a onclick="jsbjxg('{$vo.c_id}')" class="btn btn-success btn-sm pull-left" data-toggle="modal" data-target="#myModalxiugai" data-backdrop="static">编辑</a> 
+                <a class="btn btn-danger" onclick="jlls({$vo.c_id},{$vo.c_dangqianrenshu})">删除</a>
+            </td>
+        </tr>
+    </volist>
+</table>
+<script>
+    function jlls(id,eid) {  
+        if(window.confirm('确定删除？')){
+            //alert("确定");
+            window.location.href='?m=Admin&c=Jiaoxue&a=bjdel&id='+id+'&eeid='+eid;
+            return true;
+        }else{
+            //alert("取消");
+            return false;
+        }
+    }//del end
+</script>
+
+        
+
+
+
+
+
+

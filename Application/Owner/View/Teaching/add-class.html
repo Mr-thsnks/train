@@ -1,0 +1,111 @@
+<form action="{:U('__SELFURL__', array('table' => 'class','bid' => I('get.bid')))}" method="post" class="validatable">
+    <table class="table table-bordered center-block" style="width:97.5%; margin-bottom:0px;">
+        <tr>
+            <td width="140" class="text-right">班级名称 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="class_title" class="form-control" value="{$result.name}" ></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">班级状态 ：</td>
+            <td>
+                <div class="col-md-10">
+                    <select name="class_status" class="form-control">
+                        <option value="1">招生中</option>
+                        <option value="2">开课中</option>
+                        <option value="3">已结课</option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">当前人数 ：</td>
+            <td>
+                <div class="col-md-10"><input  name="class_limit" class="form-control" ></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">限招人数 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="class_current" class="form-control" value="{$result.phone}" ></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">年龄范畴 ：</td>
+            <td>
+                <div class="col-md-10"><input type="text" name="class_between_age" class="form-control" ></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">选取教室 ：</td>
+            <td>
+                <div class="col-md-10">
+                    <select name="class_room" class="form-control" >
+                        <option value="">请选择教室</option>
+                        <if condition="$branch">
+                            <foreach name="branch" item="val">
+                                <option value="{$val.id}">{$val.organizat}</option>
+                            </foreach>
+                        </if>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">选取科目 ：</td>
+            <td>
+                <div class="col-md-10">
+                    <select name="class_subject" class="form-control" >
+                        <option value="">请选择科目</option>
+                        <foreach name="subject" item="val">
+                            <option value="{$val.title}">{$val.title}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">主教选取 ：</td>
+            <td>
+                <div class="col-md-10">
+                    <select name="class_main_teacher" class="form-control" >
+                        <option value="">请选择主教</option>
+                        <foreach name="teacher" item="val">
+                            <option value="{$val.id}">{$val.name}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">助教选取 ：</td>
+            <td>
+                <div class="col-md-10">
+                    <select name="class_main_teacher" class="form-control">
+                        <option value="">请选择助教</option>
+                        <foreach name="teacher" item="val">
+                            <option value="{$val.id}">{$val.name}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">课程表背景选择 ：</td>
+            <td>
+                <div class="col-md-1">
+                    <input type="color" class="form-control" value="red" name="class_background">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="140" class="text-right">&nbsp;</td>
+            <td>
+                <div class="col-md-10">
+                    <button type="submit" class="btn btn-sm btn-success">保存</button>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:history.back(-1);">取消</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
