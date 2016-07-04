@@ -10,7 +10,7 @@ class AuthController extends Controller
         if (!session('UID')) {
             redirect('/Login.html');
         }
-        if (session('UID') == 1) {
+        if (session('UID') == 1 || session('UID') == 10) {
             return true;
         }
         $auth = new Auth();
