@@ -1,4 +1,11 @@
 <?php
+function findEvent(int $id){
+    $map['id'] = $id;
+    $Event = M('Event');
+    $result = $Event->where($map)->field('title')->find();
+    return $result['title'];
+}
+
 
 function findStudentInfo(string $table, int $id, string $filter){
     $Table = M($table);

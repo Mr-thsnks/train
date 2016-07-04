@@ -73,9 +73,10 @@ class SaleController extends BaseController
         $this->display('view' . $table);
     }
 
-    public function update(string $table)
+    public function update(string $table , int $bid)
     {   
         $map['id'] = I('get.id');
+        //原始信息的展示
         $student = $this->Student->where($map)->find();
         $studentMap['student_id'] = $student['id'];
         $studentFamily = $this->studentFamily->where($studentMap)->find(); 
@@ -90,7 +91,34 @@ class SaleController extends BaseController
         $this->assign('studentSales' , $studentSales);
         $this->assign('studentMarketing' , $studentMarketing);
         $this->assign('studentOperation' , $studentOperation);
+        //修改信息
+        if(IS_POST){
+            $studentRules = [
+                ['name', 'require', '姓名必填'],
+                ['phone', 'require', '联系方式必填'],
+                ['intention', 'require', '意向科目必填'],
+            ];
+            if (!$studentData = $this->Student->validate($studentRules)->create()) {
+                $this->alert($this->Student->getError());
+                return false;
+            }
+            $familyData = $this->studentFamily->create();
+            $marketingData = $this->studentMarketing->create();
+            $salesData = $this->studentSales->create();
+            //$marketingData['branch_event'] = I('get.evt_id');
+            $operationData['update_id'] = $map['id'];
+            $operationData['update_time'] = date("Y-m-d H:i:s" , time());
+            $result = $this->Student->where($map)->save($studentData);
+            $this->studentFamily->save($familyData);
+            $this->studentMarketing->save($marketingDate);
+            $this->studentSales->save($salesData);
+            $this->studentOperation->save($operationDate);
+// dump($studentData);
+// die;
+            chkStatus($result,'修改成功' , '修改失败' ,'/sale/view.html?table=customer&bid=' .$bid);
 
+
+        }
         $this->display('update-' . $table);
     }
 
