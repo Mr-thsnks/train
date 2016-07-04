@@ -9,34 +9,34 @@
 <div class="ulb">
     <ul class="listUl">    
         <li>
-            <h3>学院</h3>
+            <h3>学员</h3>
             <ul>
                 <li> 
-                    <a href="{:U('/Branch/create', array('table'=>'campus'))}">创建分校校区</a>
-                </li>
-                <li> 
-                    <a href="{:U('/Branch/create', array('table'=>'user'))}">创建分校帐号</a> 
+                    <a href="{:U('/teaching/view', ['table'=>'student', 'bid'=>I('get.bid')])}">学员列表</a>
                 </li>
             </ul>
         </li>
         <li>
             <h3>教学</h3>
             <ul>
-                <foreach name='leftBranch' item='val'>
-                    <li>
-                        <a href="{:U('/branch/view', array('table'=>'main', 'bid'=>$val['id']))}">{$val.organizat}</a>
-                    </li>
-                </foreach>
+                <li><a href="{:U('/teaching/view', ['table'=>'class', 'bid'=>I('get.bid')])}">班级</a></li>
+                <li><a href="{:U('/teaching/view', ['table'=>'subject', 'bid'=>I('get.bid')])}">科目</a></li>
+                <li><a href="{:U('/teaching/view', ['table'=>'priced', 'bid'=>I('get.bid')])}">定价</a></li>
+                <li><a href="{:U('/teaching/view', ['table'=>'exam', 'bid'=>I('get.bid')])}">考试</a></li>
+                <li><a href="{:U('/teaching/view', ['table'=>'hours', 'bid'=>I('get.bid')])}">课时</a></li>
+                <li><a href="{:U('/teaching/view', ['table'=>'transfer', 'bid'=>I('get.bid')])}">调课</a></li>
+                <li><a href="{:U('/teaching/view', ['table'=>'course', 'bid'=>I('get.bid')])}">排课</a></li>
+                <li><a href="{:U('/teaching/view', ['table'=>'timetable', 'bid'=>I('get.bid')])}">课程表</a></li>
             </ul>
         </li>
         <li>
             <h3>教务</h3>
             <ul>
-                <foreach name='leftBranch' item='val'>
-                    <li>
-                        <a href="{:U('/branch/view', array('table'=>'main', 'bid'=>$val['id']))}">{$val.organizat}</a>
-                    </li>
-                </foreach>
+                <li><a href="#">请假</a></li>
+                <li><a href="#">休学</a></li>
+                <li><a href="#">补课</a></li>
+                <li><a href="#">人工签到</a></li>
+                <li><a href="#">签到管理</a></li>
             </ul>
         </li>
     </ul>

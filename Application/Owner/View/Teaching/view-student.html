@@ -1,1 +1,87 @@
-view-student.html
+<!-- <table class="center-block" style="width:97.5%; margin-bottom:10px;">
+    <tr>
+        <td width="320px;">
+            <form action="?m=Admin&c=jiaoxue&a=jiaoxxmdh" method="post">
+                <input type="text" name="xmdh" placeholder="请输入手机号码或姓名"/>
+                <input class="btn btn-info" type="submit" value="查询"/>
+                <notempty name="xmdhid">
+                <a href="?m=Admin&c=jiaoxue&a=xymain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" class="btn btn-info">还原</a>
+                </notempty>
+            </form>
+        </td>
+        <td width="180px;">
+            <select class="form-control pull-left" onChange="fun1(this)" name="laiyuan">
+            <empty name="banjiid">
+                <option value="请选择班级">- 请选择班级 -</option>
+            </empty>
+            <notempty name="banjiid">
+                <option value="{$banjiid}">{$banjiid}</option>
+            </notempty>
+                <volist name="listtt" id="vo">
+                    <if condition="$vo.s_weizhi eq 学员">
+                        <if condition="$vo.s_zhuangtai eq 全款客户">
+                        <option value="{$vo.sb_banji}">{$vo.sb_banji}</option>
+                        </if>
+                    </if>
+                </volist>
+            </select>
+        </td>
+        <td width="180px;">
+            <select class="form-control pull-left" onChange="fun2(this)" name="laiyuan">
+            <empty name="guwenid">
+                <option value="请选择顾问">- 请选择顾问 -</option>
+            </empty>
+            <notempty name="guwenid">
+                <option value="{$guwenid}">{$guwenid}</option>
+            </notempty>
+                <volist name="listtt" id="vo">
+                    <if condition="$vo.s_weizhi eq 学员">
+                        <if condition="$vo.s_zhuangtai eq 全款客户">
+                        <option value="{$vo.s_genjin}">{$vo.s_genjin}</option>
+                        </if>
+                    </if>
+                </volist>
+            </select>
+        </td>
+        <td width="700px">
+            <a href="?m=Admin&c=jiaoxue&a=xymain&id={$Think.session.userid}&xqid={$Think.session.xiaoquid}" style=" font-size: 14px;" class="btn btn-success">还原</a>
+        </td>
+    </tr>
+</table> -->
+
+<table class="table table-bordered center-block" style="width:97.5%; margin-top:0px;">
+    <thead>
+        <tr>
+            <th>学员号</th>
+            <th>姓名</th>
+            <!-- <th>联系人</th> -->
+            <th>手机号</th>
+            <th>所属班级</th>
+            <th>所属顾问</th>
+            <th>科目</th>
+            <th>当前状态</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <if condition="$results">
+        <foreach name="results" item="val">
+            <tr align="center">
+                <td>{$val.student_id}</td>
+                <td>{$val.student_name}</td>
+                <!-- <td></td> -->
+                <td>{$val.student_phone}</td>
+                <td>{$val.student_class_id}</td>
+                <td>{$val.student_member_id}</td>
+                <td>{$val.student_subject_id}</td>
+                <td>{$val.student_status_text}</td>
+                <td>
+                    <a href="#" class="btn btn-danger" >删除</a>
+                </td>
+            </tr>
+        </foreach>
+    <else />
+        <tr align="center">
+            <td class="text-center" colspan="99">暂无任何数据</td>
+        </tr>
+    </if>
+</table>
